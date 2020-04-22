@@ -6,5 +6,5 @@ export enum NotificationIcon {
     Person = 'person_pin',
     Warning = 'warning',
     Error = 'error',
-    Cloud = 'cloud',
+    Cloud = 'cloud'
 }

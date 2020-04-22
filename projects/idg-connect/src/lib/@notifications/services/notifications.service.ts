@@ -7,7 +7,7 @@ import { Notification } from '../models';
 import { select$ } from '../../@rxjs';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class NotificationsService extends StoreService<Notification[]> {
     private remote2XX$: Observable<Notification[]>;
@@ -18,7 +18,7 @@ export class NotificationsService extends StoreService<Notification[]> {
     private success$: Observable<Notification[]>;
     private errors$: Observable<Notification[]>;
 
-    private select$ = (type: NotificationType) => select$(this.State$, (n) => n.filter((item) => item.type === type));
+    private select$ = (type: NotificationType) => select$(this.State$, n => n.filter(item => item.type === type));
 
     get Remote2XX$(): Observable<Notification[]> {
         if (!this.remote2XX$) {
@@ -78,7 +78,7 @@ export class NotificationsService extends StoreService<Notification[]> {
     }
 
     remove(n: Notification) {
-        this.set(this.State.filter((s) => s !== n));
+        this.set(this.State.filter(s => s !== n));
     }
 
     clear() {

@@ -17,7 +17,7 @@ export class StoreService<MODEL> {
     }
 
     constructor(initialValue: MODEL) {
-      this.state  = new Store<MODEL>(initialValue);
+        this.state = new Store<MODEL>(initialValue);
     }
 
     protected set(value: MODEL) {

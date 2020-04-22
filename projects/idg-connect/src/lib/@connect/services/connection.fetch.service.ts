@@ -44,7 +44,7 @@ export abstract class ConnectionFetchService<
         const req = this.httpClient.get<any>(url);
         this.working.next(true);
 
-        return this.fetch(url, req, false).pipe(tap((o) => this.filter.next(o)));
+        return this.fetch(url, req, false).pipe(tap(o => this.filter.next(o)));
     }
 
     /***

@@ -4,7 +4,7 @@ import {
     HttpEvent,
     HttpHandler,
     HttpInterceptor,
-    HttpRequest,
+    HttpRequest
 } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 
@@ -34,7 +34,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                         message: error.error.error,
                         raw: error.error,
                         code: 'LOCAL',
-                        id: null,
+                        id: null
                     });
                     errorMessage = `Error: ${error.error.error}`;
                 } else {
@@ -52,7 +52,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                         code: error.status,
                         raw: error,
                         id: null,
-                        type,
+                        type
                     });
                     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
                 }
@@ -67,8 +67,8 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
         {
             useClass: IDGConnectHttpInterceptor,
             provide: HTTP_INTERCEPTORS,
-            multi: true,
-        },
-    ],
+            multi: true
+        }
+    ]
 })
 export class IDGConnectHttpInterceptorModule {}

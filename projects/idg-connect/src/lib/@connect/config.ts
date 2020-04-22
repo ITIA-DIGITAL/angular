@@ -14,7 +14,7 @@ export const DEFAULT_CONFIG: IConnectionConfig = {
     retryCount: DEFAULT_MAX_RETRIES,
     dateFormat: DEFAULT_DATE_FORMAT,
     retryDelayMs: DEFAULT_DELAY,
-    serverUrl: null,
+    serverUrl: null
 };
 
 export const CONNECTION_CONFIG = new InjectionToken<IConnectionConfig>('CONNECTION_CONFIG');

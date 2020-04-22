@@ -89,7 +89,7 @@ export abstract class ConnectionService<
      */
     saveMany(values: MODEL[], q?: QUERY): Observable<MODEL[] | any> {
         if (values.length) {
-            return forkJoin(values.map((model) => this.save(model, q)));
+            return forkJoin(values.map(model => this.save(model, q)));
         } else {
             return of([]);
         }

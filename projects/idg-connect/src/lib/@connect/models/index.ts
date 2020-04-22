@@ -6,4 +6,3 @@ export * from './data.filter.interface';
 export * from './data.interface';
 
 export * from './connection.query.param';
-

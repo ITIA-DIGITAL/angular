@@ -1,4 +1,4 @@
-import {IData} from '../../../@connect/models';
+import { IData } from '../../../@connect/models';
 
 export interface Permission extends IData {
     permissionable_id: number | string;

@@ -5,6 +5,6 @@ import { IDGConnectHttpInterceptorModule } from './idg-connect.http.interceptor'
 
 @NgModule({
     declarations: [],
-    imports: [NotificationsModule, IDGConnectHttpInterceptorModule],
+    imports: [NotificationsModule, IDGConnectHttpInterceptorModule]
 })
 export class IDGConnectModule {}
