@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "idgConnect",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "idg-connect",
+      "kebab-case"
+    ]
+  }
+}
