@@ -82,9 +82,133 @@
           }
         }
       }
-    }},
+    },
+    "idg-docs": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/idg-docs",
+      "sourceRoot": "projects/idg-docs/src",
+      "prefix": "idg-docs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/idg-docs",
+            "index": "projects/idg-docs/src/index.html",
+            "main": "projects/idg-docs/src/main.ts",
+            "polyfills": "projects/idg-docs/src/polyfills.ts",
+            "tsConfig": "projects/idg-docs/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/idg-docs/src/favicon.ico",
+              "projects/idg-docs/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "projects/idg-docs/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/idg-docs/src/environments/environment.ts",
+                  "with": "projects/idg-docs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "idg-docs:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "idg-docs:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "idg-docs:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/idg-docs/src/test.ts",
+            "polyfills": "projects/idg-docs/src/polyfills.ts",
+            "tsConfig": "projects/idg-docs/tsconfig.spec.json",
+            "karmaConfig": "projects/idg-docs/karma.conf.js",
+            "assets": [
+              "projects/idg-docs/src/favicon.ico",
+              "projects/idg-docs/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "projects/idg-docs/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/idg-docs/tsconfig.app.json",
+              "projects/idg-docs/tsconfig.spec.json",
+              "projects/idg-docs/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/idg-docs/e2e/protractor.conf.js",
+            "devServerTarget": "idg-docs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "idg-docs:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "analytics": "7800fa77-3b13-4196-a3c8-379ee09f5f85"
   },
-  "defaultProject": "idg-connect"
+  "defaultProject": "idg-docs"
 }
