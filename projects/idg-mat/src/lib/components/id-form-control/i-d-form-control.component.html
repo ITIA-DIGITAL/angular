@@ -1,0 +1,69 @@
+<ng-container [ngSwitch]="config?.elementType">
+    <!-- divider -->
+    <ng-container *ngSwitchCase="'divider'">
+        <h2 *ngIf="config?.hint">{{ config?.hint }}</h2>
+        <mat-divider></mat-divider>
+    </ng-container>
+
+    <!-- input -->
+    <ID-input-form-control *ngSwitchCase="'input'" [config]="config" (onchange)="onControlChanges($event)">
+    </ID-input-form-control>
+
+    <!-- email -->
+    <ID-email-input-form-control *ngSwitchCase="'email'" [config]="config" (onchange)="onControlChanges($event)">
+    </ID-email-input-form-control>
+
+    <!-- url -->
+    <ID-url-input-form-control *ngSwitchCase="'url'" [config]="config" (onchange)="onControlChanges($event)">
+    </ID-url-input-form-control>
+
+    <!-- textarea -->
+    <ID-textarea-form-control *ngSwitchCase="'textarea'" [config]="config" (onchange)="onControlChanges($event)">
+    </ID-textarea-form-control>
+
+    <!-- input-date -->
+    <ID-date-picker-form-control
+        *ngSwitchCase="'date-input'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></ID-date-picker-form-control>
+
+    <!-- input-file -->
+    <ID-file-picker-form-control
+        *ngSwitchCase="'file-input'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></ID-file-picker-form-control>
+
+    <!-- checkbox -->
+    <ID-checkbox-form-control
+        *ngSwitchCase="'checkbox'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></ID-checkbox-form-control>
+
+    <!-- checkbox-list -->
+    <ID-checkbox-list-form-control
+        *ngSwitchCase="'checkbox-list'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></ID-checkbox-list-form-control>
+
+    <!-- select -->
+    <IDigital-select-form-control *ngSwitchCase="'select'" [config]="config" (onchange)="onControlChanges($event)">
+    </IDigital-select-form-control>
+
+    <!-- autocomplete -->
+    <ID-autocomplete-form-control
+        *ngSwitchCase="'autocomplete'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></ID-autocomplete-form-control>
+
+    <!-- autocompletes -->
+    <ID-autocompletes-form-control
+        *ngSwitchCase="'autocompletes'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></ID-autocompletes-form-control>
+</ng-container>

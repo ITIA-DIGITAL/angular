@@ -87,7 +87,7 @@ import { A11yModule } from '@angular/cdk/a11y';
         MatCardModule,
         PortalModule,
         CdkTreeModule,
-        A11yModule,
-    ],
+        A11yModule
+    ]
 })
 export class IDGMatModule {}
