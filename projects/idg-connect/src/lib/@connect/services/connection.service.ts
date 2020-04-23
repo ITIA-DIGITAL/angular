@@ -36,7 +36,7 @@ export abstract class ConnectionService<
      */
     post(d: MODEL, q?: QUERY): Observable<MODEL> {
         const url = toUrl(this.config, q || this.Query);
-        this.working.next(true);
+        this.setWorking(true);
 
         return this.httpClient
             .post<MODEL>(url, { d })
@@ -50,7 +50,7 @@ export abstract class ConnectionService<
      */
     patch(d: MODEL, q?: QUERY): Observable<MODEL> {
         const url = toUrl(this.config, q || this.Query, `/${d.id}`);
-        this.working.next(true);
+        this.setWorking(true);
 
         return this.httpClient
             .patch<MODEL>(url, { d })
@@ -64,7 +64,7 @@ export abstract class ConnectionService<
      */
     delete(id: number | string, q?: QUERY): Observable<any> {
         const url = toUrl(this.config, q || this.Query, `/${id}`);
-        this.working.next(true);
+        this.setWorking(true);
 
         return this.httpClient.delete(url).pipe(this.finalizeConnection());
     }

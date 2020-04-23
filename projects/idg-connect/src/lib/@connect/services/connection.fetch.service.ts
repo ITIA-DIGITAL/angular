@@ -14,10 +14,7 @@ export abstract class ConnectionFetchService<
     MODEL extends IData,
     QUERY extends ConnectionQueryParam
 > extends ConnectionCacheService<MODEL> {
-    /**
-     * Data filter object
-     */
-    protected abstract query: Store<QUERY>;
+    private querySubscription: Subscription;
 
     get Query(): QUERY {
         return this.query.getValue();
@@ -34,6 +31,14 @@ export abstract class ConnectionFetchService<
             throw new Error(':FetchConnectionService => no REST source URL present.');
         }
     }
+    /**
+     * Data filter object
+     */
+    protected abstract query: Store<QUERY>;
+
+    setQuery(d: QUERY): void {
+        this.query.next(d);
+    }
 
     /**
      * Fetch filter for item list from server
@@ -42,9 +47,9 @@ export abstract class ConnectionFetchService<
     getFilter(query?: QUERY): Observable<any> {
         const url = toUrl(this.config, query || this.Query, '/filters');
         const req = this.httpClient.get<any>(url);
-        this.working.next(true);
+        this.setWorking(true);
 
-        return this.fetch(url, req, false).pipe(tap(o => this.filter.next(o)));
+        return this.fetch(url, req, false).pipe(tap(o => this.setFilter(o)));
     }
 
     /***
@@ -52,7 +57,7 @@ export abstract class ConnectionFetchService<
      */
     queryChanged(q: QUERY): void {
         q.pageIndex = 0;
-        this.query.next(q);
+        this.setQuery(q);
     }
 
     queryStringChanged(text: string): void {
@@ -72,8 +77,6 @@ export abstract class ConnectionFetchService<
         q.pageSize = size;
         this.queryChanged(q);
     }
-
-    private querySubscription: Subscription;
     /**
      * If set is done will subscribe to Query changes,
      * and emmit the Count$ and List$.
@@ -107,15 +110,15 @@ export abstract class ConnectionFetchService<
     getList(query?: QUERY, changeState: boolean = true): Observable<MODEL[]> {
         const url = toUrl(this.config, query || this.Query);
         const req = this.httpClient.get<MODEL[]>(url);
-        this.working.next(true);
+        this.setWorking(true);
 
         return this.fetch(url, req, (query || this.Query).useCache).pipe(
             tap((o: MODEL[]) => {
                 if (changeState) {
                     if ((query || this.Query).accumulate) {
-                        this.list.next([...this.list.getValue(), ...o]);
+                        this.setList([...this.list.getValue(), ...o]);
                     } else {
-                        this.list.next(o);
+                        this.setList(o);
                     }
                 }
             })
@@ -130,12 +133,12 @@ export abstract class ConnectionFetchService<
     getCount(query?: QUERY, changeState: boolean = true): Observable<number> {
         const url = toUrl(this.config, query || this.Query, '/count');
         const req = this.httpClient.get<number>(url);
-        this.working.next(true);
+        this.setWorking(true);
 
         return this.fetch(url, req, (query || this.Query).useCache).pipe(
             tap((o: number) => {
                 if (changeState) {
-                    this.count.next(+o);
+                    this.setCount(+o);
                 }
             })
         );
@@ -152,7 +155,7 @@ export abstract class ConnectionFetchService<
     ): Observable<MODEL> {
         const url = toUrl(this.config, query || this.Query, `/${id}`);
         const req = this.httpClient.get<MODEL>(url);
-        this.working.next(true);
+        this.setWorking(true);
 
         return iif(
             () => id.toString().toLocaleLowerCase() === 'new',
@@ -161,7 +164,7 @@ export abstract class ConnectionFetchService<
         ).pipe(
             tap((o: MODEL) => {
                 if (changeState) {
-                    this.current.next(o);
+                    this.setCurrent(o);
                 }
             })
         );
