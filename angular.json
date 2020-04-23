@@ -1,214 +1,199 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "idg-connect": {
-      "projectType": "library",
-      "root": "projects/idg-connect",
-      "sourceRoot": "projects/idg-connect/src",
-      "prefix": "idg-connect",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/idg-connect/tsconfig.lib.json",
-            "project": "projects/idg-connect/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/idg-connect/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/idg-connect/src/test.ts",
-            "tsConfig": "projects/idg-connect/tsconfig.spec.json",
-            "karmaConfig": "projects/idg-connect/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/idg-connect/tsconfig.lib.json",
-              "projects/idg-connect/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "idg-mat": {
-      "projectType": "library",
-      "root": "projects/idg-mat",
-      "sourceRoot": "projects/idg-mat/src",
-      "prefix": "idg-mat",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/idg-mat/tsconfig.lib.json",
-            "project": "projects/idg-mat/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/idg-mat/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/idg-mat/src/test.ts",
-            "tsConfig": "projects/idg-mat/tsconfig.spec.json",
-            "karmaConfig": "projects/idg-mat/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/idg-mat/tsconfig.lib.json",
-              "projects/idg-mat/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "idg-docs": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "projects/idg-docs",
-      "sourceRoot": "projects/idg-docs/src",
-      "prefix": "idg-docs",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/idg-docs",
-            "index": "projects/idg-docs/src/index.html",
-            "main": "projects/idg-docs/src/main.ts",
-            "polyfills": "projects/idg-docs/src/polyfills.ts",
-            "tsConfig": "projects/idg-docs/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "projects/idg-docs/src/favicon.ico",
-              "projects/idg-docs/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "projects/idg-docs/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/idg-docs/src/environments/environment.ts",
-                  "with": "projects/idg-docs/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "idg-connect": {
+            "projectType": "library",
+            "root": "projects/idg-connect",
+            "sourceRoot": "projects/idg-connect/src",
+            "prefix": "idg-connect",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/idg-connect/tsconfig.lib.json",
+                        "project": "projects/idg-connect/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/idg-connect/tsconfig.lib.prod.json"
+                        }
+                    }
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/idg-connect/src/test.ts",
+                        "tsConfig": "projects/idg-connect/tsconfig.spec.json",
+                        "karmaConfig": "projects/idg-connect/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/idg-connect/tsconfig.lib.json",
+                            "projects/idg-connect/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
                 }
-              ]
             }
-          }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "idg-docs:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "idg-docs:build:production"
+        "idg-mat": {
+            "projectType": "library",
+            "root": "projects/idg-mat",
+            "sourceRoot": "projects/idg-mat/src",
+            "prefix": "idg-mat",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/idg-mat/tsconfig.lib.json",
+                        "project": "projects/idg-mat/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/idg-mat/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/idg-mat/src/test.ts",
+                        "tsConfig": "projects/idg-mat/tsconfig.spec.json",
+                        "karmaConfig": "projects/idg-mat/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["projects/idg-mat/tsconfig.lib.json", "projects/idg-mat/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
             }
-          }
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "idg-docs:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/idg-docs/src/test.ts",
-            "polyfills": "projects/idg-docs/src/polyfills.ts",
-            "tsConfig": "projects/idg-docs/tsconfig.spec.json",
-            "karmaConfig": "projects/idg-docs/karma.conf.js",
-            "assets": [
-              "projects/idg-docs/src/favicon.ico",
-              "projects/idg-docs/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "projects/idg-docs/src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/idg-docs/tsconfig.app.json",
-              "projects/idg-docs/tsconfig.spec.json",
-              "projects/idg-docs/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/idg-docs/e2e/protractor.conf.js",
-            "devServerTarget": "idg-docs:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "idg-docs:serve:production"
+        "idg-docs": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/idg-docs",
+            "sourceRoot": "projects/idg-docs/src",
+            "prefix": "idg-docs",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/idg-docs",
+                        "index": "projects/idg-docs/src/index.html",
+                        "main": "projects/idg-docs/src/main.ts",
+                        "polyfills": "projects/idg-docs/src/polyfills.ts",
+                        "tsConfig": "projects/idg-docs/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["projects/idg-docs/src/favicon.ico", "projects/idg-docs/src/assets"],
+                        "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+                            "projects/idg-docs/src/styles.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/idg-docs/src/environments/environment.ts",
+                                    "with": "projects/idg-docs/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "idg-docs:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "idg-docs:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "idg-docs:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/idg-docs/src/test.ts",
+                        "polyfills": "projects/idg-docs/src/polyfills.ts",
+                        "tsConfig": "projects/idg-docs/tsconfig.spec.json",
+                        "karmaConfig": "projects/idg-docs/karma.conf.js",
+                        "assets": ["projects/idg-docs/src/favicon.ico", "projects/idg-docs/src/assets"],
+                        "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+                            "projects/idg-docs/src/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/idg-docs/tsconfig.app.json",
+                            "projects/idg-docs/tsconfig.spec.json",
+                            "projects/idg-docs/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/idg-docs/e2e/protractor.conf.js",
+                        "devServerTarget": "idg-docs:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "idg-docs:serve:production"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  },
-  "cli": {
-    "analytics": "7800fa77-3b13-4196-a3c8-379ee09f5f85"
-  },
-  "defaultProject": "idg-docs"
+    },
+    "cli": {
+        "analytics": "7800fa77-3b13-4196-a3c8-379ee09f5f85"
+    },
+    "defaultProject": "idg-docs"
 }

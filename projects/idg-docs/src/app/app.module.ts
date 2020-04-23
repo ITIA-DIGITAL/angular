@@ -10,6 +10,6 @@ import { LayoutModule } from './layout/layout.module';
     declarations: [AppComponent],
     imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, LayoutModule],
     providers: [],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

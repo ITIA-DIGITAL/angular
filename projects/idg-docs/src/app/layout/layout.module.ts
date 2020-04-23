@@ -5,6 +5,6 @@ import { TopNavComponent } from './top-nav/top-nav.component';
 @NgModule({
     declarations: [TopNavComponent],
     exports: [TopNavComponent],
-    imports: [CommonModule],
+    imports: [CommonModule]
 })
 export class LayoutModule {}
