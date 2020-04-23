@@ -19,6 +19,10 @@
       "idg-connect": [
         "dist/idg-connect/idg-connect",
         "dist/idg-connect"
+      ],
+      "idg-mat": [
+        "dist/idg-mat/idg-mat",
+        "dist/idg-mat"
       ]
     }
   },

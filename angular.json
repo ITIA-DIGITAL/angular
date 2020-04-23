@@ -42,6 +42,46 @@
           }
         }
       }
+    },
+    "idg-mat": {
+      "projectType": "library",
+      "root": "projects/idg-mat",
+      "sourceRoot": "projects/idg-mat/src",
+      "prefix": "idg-mat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/idg-mat/tsconfig.lib.json",
+            "project": "projects/idg-mat/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/idg-mat/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/idg-mat/src/test.ts",
+            "tsConfig": "projects/idg-mat/tsconfig.spec.json",
+            "karmaConfig": "projects/idg-mat/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/idg-mat/tsconfig.lib.json",
+              "projects/idg-mat/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "cli": {
     "analytics": "7800fa77-3b13-4196-a3c8-379ee09f5f85"
