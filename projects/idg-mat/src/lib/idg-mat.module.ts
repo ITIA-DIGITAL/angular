@@ -25,9 +25,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatChipsModule } from '@angular/material/chips';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSortModule } from '@angular/material/sort';
@@ -41,6 +41,9 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { A11yModule } from '@angular/cdk/a11y';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [],
@@ -87,7 +90,10 @@ import { A11yModule } from '@angular/cdk/a11y';
         MatCardModule,
         PortalModule,
         CdkTreeModule,
-        A11yModule
+        A11yModule,
+
+        ReactiveFormsModule,
+        FlexLayoutModule
     ]
 })
 export class IDGMatModule {}

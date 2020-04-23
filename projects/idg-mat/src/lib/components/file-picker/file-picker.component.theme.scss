@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin idg-mat-file-picker-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    $is-dark-theme: map-get($theme, is-dark);
+
+    $label-color: mat-color($foreground, secondary-text, if($is-dark-theme, 0.7, 0.6));
+
+    idg-mat-file-picker {
+        .mat-card {
+            border: 0.1em solid map-get($foreground, 'divider');
+        }
+
+        .hint,
+        .placeholder {
+            color: $label-color;
+            background-color: map-get($background, 'card');
+        }
+    }
+
+    .drop-zone {
+        border: dotted 3px map-get($foreground, 'divider') !important;
+    }
+}

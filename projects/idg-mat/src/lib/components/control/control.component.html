@@ -1,0 +1,67 @@
+<ng-container [ngSwitch]="config?.elementType">
+    <!-- divider -->
+    <ng-container *ngSwitchCase="'divider'">
+        <h2 *ngIf="config?.hint">{{ config?.hint }}</h2>
+        <mat-divider></mat-divider>
+    </ng-container>
+
+    <!-- input -->
+    <idg-mat-input *ngSwitchCase="'input'" [config]="config" (onchange)="onControlChanges($event)"> </idg-mat-input>
+
+    <!-- email -->
+    <idg-mat-input-email *ngSwitchCase="'email'" [config]="config" (onchange)="onControlChanges($event)">
+    </idg-mat-input-email>
+
+    <!-- url -->
+    <idg-mat-input-url *ngSwitchCase="'url'" [config]="config" (onchange)="onControlChanges($event)">
+    </idg-mat-input-url>
+
+    <!-- textarea -->
+    <idg-mat-textarea *ngSwitchCase="'textarea'" [config]="config" (onchange)="onControlChanges($event)">
+    </idg-mat-textarea>
+
+    <!-- input-date -->
+    <idg-mat-date-picker
+        *ngSwitchCase="'date-input'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></idg-mat-date-picker>
+
+    <!-- input-file -->
+    <idg-mat-file-picker
+        *ngSwitchCase="'file-input'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></idg-mat-file-picker>
+
+    <!-- checkbox -->
+    <idg-mat-checkbox
+        *ngSwitchCase="'checkbox'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></idg-mat-checkbox>
+
+    <!-- checkbox-list -->
+    <idg-mat-checkbox-list
+        *ngSwitchCase="'checkbox-list'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></idg-mat-checkbox-list>
+
+    <!-- select -->
+    <idg-mat-select *ngSwitchCase="'select'" [config]="config" (onchange)="onControlChanges($event)"> </idg-mat-select>
+
+    <!-- autocomplete -->
+    <idg-mat-autocomplete
+        *ngSwitchCase="'autocomplete'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></idg-mat-autocomplete>
+
+    <!-- autocompletes -->
+    <idg-mat-autocompletes
+        *ngSwitchCase="'autocompletes'"
+        [config]="config"
+        (onchange)="onControlChanges($event)"
+    ></idg-mat-autocompletes>
+</ng-container>

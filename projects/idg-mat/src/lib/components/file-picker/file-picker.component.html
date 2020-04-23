@@ -1,0 +1,74 @@
+<mat-card
+    idgMatDropFiles
+    [ngClass]="{ 'drop-zone': isOverDragAndDrop }"
+    [fileType]="fileType"
+    [files]="fileItems"
+    (mouseOver)="isOverDragAndDrop = $event"
+>
+    <mat-card-content>
+        <mat-label class="hint">{{ hint }}</mat-label>
+        <!-- any content we want -->
+        <ng-content></ng-content>
+        <!-- header -->
+        <mat-list *ngIf="!disabled">
+            <mat-list-item>
+                <mat-label mat-line class="placeholder">
+                    {{ placeholder || 'Drag or select' }}
+                    {{ filesCount }}
+                    {{ fileTypeConfig[fileType]?.extensions }}
+                </mat-label>
+
+                <button
+                    matTooltip="Select files"
+                    color="primary"
+                    mat-icon-button
+                    (click)="loadFiles()"
+                    *ngIf="filesCount > fileItems.length"
+                >
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <button
+                    matTooltip="Remove all"
+                    mat-icon-button
+                    color="warn"
+                    *ngIf="fileItems[0]"
+                    (click)="resetUpload()"
+                >
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+        <!-- file list -->
+        <mat-list *ngIf="fileItems[0]">
+            <h3 mat-subheader>Selected files</h3>
+            <mat-divider></mat-divider>
+
+            <mat-list-item *ngFor="let file of fileItems; index as i">
+                <mat-icon mat-list-icon>{{ iconFileType }}</mat-icon>
+                <h4 mat-line>{{ file.name }}</h4>
+                <p mat-line>{{ file.size / 1024 | number: '.2-2' }} Kb</p>
+                <mat-progress-bar
+                    mode="determinate"
+                    *ngIf="file['progress']"
+                    [value]="file['progress']"
+                ></mat-progress-bar>
+                <button
+                    color="warn"
+                    mat-icon-button
+                    [attr.aria-label]="'Remove ' + file.name"
+                    (click)="removeFile(file)"
+                >
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
+
+<input
+    type="file"
+    style="display:none;"
+    [accept]="fileTypeConfig[fileType] ? fileTypeConfig[fileType].extensions : fileTypeConfig.default.extensions"
+    [multiple]="filesCount > 1"
+    #fileUpload
+/>
