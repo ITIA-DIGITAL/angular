@@ -5,9 +5,11 @@
     <div class="spacer"></div>
 
     <a class="menu" [routerLink]="['material', 'forms']" [routerLinkActive]="'active'">
-        <span>FORMS</span>
+        <span fxHide.xs>FORMS</span>
+        <mat-icon fxHide fxShow.xs>code</mat-icon>
     </a>
     <a class="menu" [routerLink]="['material', 'components']" [routerLinkActive]="'active'">
-        <span>COMPONENTS</span>
+        <span fxHide.xs>COMPONENTS</span>
+        <mat-icon fxHide fxShow.xs>widgets</mat-icon>
     </a>
 </div>

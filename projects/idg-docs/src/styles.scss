@@ -43,11 +43,13 @@ body {
     a.menu {
         color: $primary-contrast-color;
 
-        span {
-            padding: 21px;
+        span,
+        mat-icon {
+            padding: 20px;
             margin: 0 auto;
             display: block;
         }
+
         &.active {
             background-color: $primary-contrast-color;
             color: $primary-color;
