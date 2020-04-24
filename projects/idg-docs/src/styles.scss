@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 $primary-color: rgb(36, 109, 151);
+$primary-contrast-color: rgb(216, 169, 59);
 
 html,
 body {
@@ -37,6 +38,20 @@ body {
 
     a:hover {
         color: $primary-color;
+    }
+
+    a.menu {
+        color: $primary-contrast-color;
+
+        span {
+            padding: 21px;
+            margin: 0 auto;
+            display: block;
+        }
+        &.active {
+            background-color: $primary-contrast-color;
+            color: $primary-color;
+        }
     }
 
     .content {
