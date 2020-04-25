@@ -5,10 +5,13 @@
     [files]="fileItems"
     (mouseOver)="isOverDragAndDrop = $event"
 >
-    <mat-card-content>
-        <mat-label class="hint">{{ hint }}</mat-label>
+    <mat-card-content class="inner-ng-content">
         <!-- any content we want -->
         <ng-content></ng-content>
+    </mat-card-content>
+
+    <mat-card-content>
+        <mat-label class="hint">{{ hint }}</mat-label>
         <!-- header -->
         <mat-list *ngIf="!disabled">
             <mat-list-item>

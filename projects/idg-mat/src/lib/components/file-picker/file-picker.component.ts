@@ -1,9 +1,19 @@
-import { ViewEncapsulation, ElementRef, forwardRef, Component, ViewChild, OnInit } from '@angular/core';
-import { Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl } from '@angular/forms';
+import {
+    ViewEncapsulation,
+    ElementRef,
+    forwardRef,
+    Component,
+    Optional,
+    SkipSelf,
+    Host,
+    ViewChild,
+    OnInit
+} from '@angular/core';
+import { Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, ControlContainer } from '@angular/forms';
 
-import { AbstractControlComponent } from '../../concerns/abstract.control.component';
-import { fileType, FileTypes } from '../../models/file.type';
 import { DropFilesDirective } from './drop-files.directive';
+import { AbstractControlComponent } from '../../concerns';
+import { fileType, FileTypes } from '../../models';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -40,8 +50,14 @@ export class FilePickerComponent extends AbstractControlComponent<File[]> implem
     isOverDragAndDrop = false;
     iconFileType: string;
 
-    constructor(public drop: DropFilesDirective) {
-        super();
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        controlContainer: ControlContainer,
+        public drop: DropFilesDirective
+    ) {
+        super(controlContainer);
     }
 
     ngOnInit() {

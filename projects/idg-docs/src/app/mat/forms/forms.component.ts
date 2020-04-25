@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IControlConfig, IDGFormGroup } from '@idg/mat';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'idg-docs-forms',

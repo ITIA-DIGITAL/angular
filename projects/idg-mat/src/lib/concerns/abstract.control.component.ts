@@ -1,13 +1,36 @@
-import { ControlValueAccessor } from '@angular/forms';
-import { EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { EventEmitter, Host, Input, OnDestroy, OnInit, Optional, Output, SkipSelf } from '@angular/core';
+import { ControlContainer, ControlValueAccessor } from '@angular/forms';
 
-import { IControlComponent } from '../models/control.component.interface';
-import { IControlConfig } from '../models/control.config.interface';
+import { IControlComponent, IControlConfig, IDGFormControl } from '../models';
+/*
+ngControl: NgControl;
 
+    constructor(public injector: Injector) {
+        super();
+    }
+    ngOnInit(): void {
+        this.ngControl = this.injector.get(NgControl);
+        if (this.ngControl != null) {
+            this.ngControl.valueAccessor = this;
+        }
+        console.log(this);
+        // super.ngOnInit();
+    }
+ */
 export abstract class AbstractControlComponent<T>
     implements IControlComponent, ControlValueAccessor, OnInit, OnDestroy {
+    @Input() formControlName: string;
     @Input() config: IControlConfig;
     @Input() name: string;
+
+    control: IDGFormControl;
+
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        private controlContainer: ControlContainer
+    ) {}
 
     // UI, props
     placeholder: string;
@@ -23,8 +46,36 @@ export abstract class AbstractControlComponent<T>
     disabled: boolean;
 
     ngOnInit(): void {
+        console.log(this);
+
         if (!this.config) {
-            throw new Error('No config (IControlConfig) provided');
+            if (this.controlContainer) {
+                if (this.formControlName) {
+                    const c: any = this.controlContainer.control.get(this.formControlName);
+
+                    if (!c) {
+                        throw new Error(`IDG: ${this.formControlName} not found in form`);
+                    }
+
+                    if (!(c instanceof IDGFormControl)) {
+                        throw new Error('IDG: FormControl is not IDGFormControl');
+                    }
+
+                    this.control = c as IDGFormControl;
+                    this.config = this.control.config;
+                } else {
+                    throw new Error('IDG: Missing [FormControlName] directive from host element of the component');
+                }
+            } else {
+                throw new Error(
+                    `IDG: No config (IControlConfig) provided, check ${this.formControlName ||
+                        this.name} control is inside a [formGroup] container or [config] param is provided`
+                );
+            }
+        }
+
+        if (!this.config) {
+            throw new Error('IDG: No config (IControlConfig) provided');
         }
 
         if (!this.name) {

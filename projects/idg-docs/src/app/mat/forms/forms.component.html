@@ -1,1 +1,25 @@
-<h1>forms works!</h1>
+<div fxLayout="row wrap">
+    <div class="inner-content" fxFlex="20" fxFlex.xs="100">
+        <mat-card>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item>
+                        <a class="menu" matLine [routerLink]="['./', 'descriptive']" [routerLinkActive]="'active'">
+                            <span>Descriptive</span>
+                        </a>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        <a class="menu" matLine [routerLink]="['./', 'model-driven']" [routerLinkActive]="'active'">
+                            <span>Home</span>
+                        </a>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="inner-content" fxFlex="80" fxFlex.xs="100">
+        <router-outlet></router-outlet>
+    </div>
+</div>

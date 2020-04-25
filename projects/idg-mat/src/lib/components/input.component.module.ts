@@ -18,15 +18,25 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
         <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>{{ hint }}</mat-label>
             <div fxLayout="row" fxLayoutAlign="space-between center">
-                <input
-                    matInput
-                    autocomplete="off"
-                    (input)="change($event.target['value'])"
-                    [placeholder]="placeholder"
-                    [disabled]="disabled"
-                    [value]="value"
-                />
-                <ng-content></ng-content>
+                <ng-content select="[matPrefix]"></ng-content>
+
+                <div fxFlex fxLayout="column">
+                    <input
+                        matInput
+                        autocomplete="off"
+                        (input)="change($event.target['value'])"
+                        [placeholder]="placeholder"
+                        [disabled]="disabled"
+                        [value]="value"
+                    />
+                    <ng-content select="mat-hint"></ng-content>
+                    <ng-content select="mat-error"></ng-content>
+                    <mat-error *ngIf="control?.errors?.match">Invalid email. </mat-error>
+                </div>
+
+                <ng-content select="[matSuffix]"></ng-content>
+                <ng-content select="button"></ng-content>
+                <ng-content select="a"></ng-content>
             </div>
         </mat-form-field>
     `,

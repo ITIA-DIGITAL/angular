@@ -1,0 +1,80 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            HTML descriptive
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-tab-group>
+            <mat-tab label="Form">
+                <div class="tab-content" fxLayout="row">
+                    <div fxFlex>
+                        <ng-container *ngTemplateOutlet="descriptiveForm"></ng-container>
+                    </div>
+                    <div fxFlex>
+                        <idg-mat-terminal title="Result" [code]="form.value | json"></idg-mat-terminal>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="HTML">
+                <div class="tab-content">
+                    <idg-mat-terminal title="Code" [code]="html"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+            <mat-tab label="TS">
+                <div class="tab-content">
+                    <idg-mat-terminal title="Code" [code]="ts"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #descriptiveForm>
+    <form [formGroup]="form" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="7px">
+        <idg-mat-input fxFlex formControlName="username">
+            <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+        </idg-mat-input>
+        <idg-mat-input-url fxFlex formControlName="website">
+            <mat-error *ngIf="form.controls.website?.errors?.required">Required</mat-error>
+            <a mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </a>
+        </idg-mat-input-url>
+        <idg-mat-input-email fxFlex formControlName="email">
+            <mat-hint>Un email estudiantil </mat-hint>
+            <mat-error *ngIf="form.controls.email?.errors?.required">Required</mat-error>
+
+            <button
+                mat-icon-button
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+            >
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+        </idg-mat-input-email>
+        <idg-mat-select formControlName="gender">
+            <mat-error *ngIf="form.controls.gender?.errors?.required">Required</mat-error>
+        </idg-mat-select>
+        <idg-mat-autocomplete formControlName="country">
+            <mat-icon matSuffix>flag</mat-icon>
+            <mat-error *ngIf="form.controls.country?.errors?.required">Required</mat-error>
+        </idg-mat-autocomplete>
+        <idg-mat-autocompletes formControlName="countries">
+            <mat-icon matSuffix>emoji_flags</mat-icon>
+            <mat-error *ngIf="form.controls.country?.errors?.required">Required</mat-error>
+        </idg-mat-autocompletes>
+        <idg-mat-textarea formControlName="about">
+            <mat-icon matPrefix>face</mat-icon>
+            <mat-error *ngIf="form.controls.about?.errors?.required">Required</mat-error>
+        </idg-mat-textarea>
+        <idg-mat-date-picker formControlName="birthday">
+            <mat-icon matPrefix>cake</mat-icon>
+        </idg-mat-date-picker>
+        <idg-mat-file-picker formControlName="files">
+            <span>hola</span>
+        </idg-mat-file-picker>
+    </form>
+</ng-template>

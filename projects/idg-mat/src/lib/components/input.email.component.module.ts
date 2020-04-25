@@ -2,9 +2,9 @@ import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@a
 import { Component, forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AbstractControlComponent } from '../concerns/abstract.control.component';
-import { IDGMatModule } from '../idg-mat.module';
+import { AbstractControlComponent } from '../concerns';
 import { emailRegEx as regex } from '../models/regex';
+import { IDGMatModule } from '../idg-mat.module';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -24,15 +24,24 @@ const IDG_MAT_NG_VALIDATORS = {
             <mat-label>{{ hint }}</mat-label>
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <mat-icon matPrefix>alternate_email</mat-icon>
-                <input
-                    matInput
-                    autocomplete="off"
-                    (input)="change($event.target['value'])"
-                    [placeholder]="placeholder"
-                    [disabled]="disabled"
-                    [value]="value"
-                />
-                <ng-content></ng-content>
+
+                <div fxFlex fxLayout="column">
+                    <input
+                        matInput
+                        autocomplete="off"
+                        (input)="change($event.target['value'])"
+                        [placeholder]="placeholder"
+                        [disabled]="disabled"
+                        [value]="value"
+                    />
+                    <ng-content select="mat-hint"></ng-content>
+                    <ng-content select="mat-error"></ng-content>
+                    <mat-error *ngIf="control?.errors?.match">Invalid</mat-error>
+                </div>
+
+                <ng-content select="[matSuffix]"></ng-content>
+                <ng-content select="button"></ng-content>
+                <ng-content select="a"></ng-content>
             </div>
         </mat-form-field>
     `,
@@ -51,12 +60,12 @@ const IDG_MAT_NG_VALIDATORS = {
 })
 export class InputEmailComponent extends AbstractControlComponent<string> implements Validator {
     validate(c: AbstractControl) {
+        if (!c.value) return null;
+
         return regex.test(c.value)
             ? null
             : {
-                  email: {
-                      valid: false
-                  }
+                  match: true
               };
     }
 }

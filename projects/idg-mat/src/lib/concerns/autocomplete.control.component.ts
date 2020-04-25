@@ -27,7 +27,7 @@ export abstract class AutocompleteControlComponent<T> extends SelectControlCompo
         super.ngOnInit();
 
         if (!this.filter) {
-            throw new Error('HTML filter element not implemented on component');
+            throw new Error('IDG: HTML filter element not implemented on component');
         }
 
         if (!this.displayFn) {
@@ -83,4 +83,6 @@ export abstract class AutocompleteControlComponent<T> extends SelectControlCompo
         this.value = option.value;
         this.change(this.value);
     }
+
+    abstract onClear(): void;
 }

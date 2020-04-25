@@ -61,11 +61,11 @@ export abstract class ConnectionCacheService<MODEL extends IData> extends StoreD
         super();
 
         if (!config.maxCacheAge) {
-            throw new Error(':ConnectionCacheService => no cache age present.');
+            throw new Error('IDG: ConnectionCacheService => no cache age present.');
         }
 
         if (!config.retryCount && config.retryCount !== 0) {
-            throw new Error(':ConnectionCacheService => no retry count present.');
+            throw new Error('IDG: ConnectionCacheService => no retry count present.');
         }
     }
 

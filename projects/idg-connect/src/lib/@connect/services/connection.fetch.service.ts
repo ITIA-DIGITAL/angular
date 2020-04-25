@@ -28,7 +28,7 @@ export abstract class ConnectionFetchService<
         super(config);
 
         if (!config.sourceUrl) {
-            throw new Error(':FetchConnectionService => no REST source URL present.');
+            throw new Error('IDG: FetchConnectionService => no REST source URL present.');
         }
     }
     /**

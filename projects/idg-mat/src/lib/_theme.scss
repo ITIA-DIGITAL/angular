@@ -8,8 +8,8 @@
     $background: map-get($theme, background);
     $background-color: map-get($background, 'card');
 
-    idg-mat-input-email,
     idg-mat-input-url,
+    idg-mat-input-email,
     idg-mat-autocompletes {
         .mat-form-field-appearance-outline .mat-form-field-infix {
             padding: 0.4em 0 !important;

@@ -2,7 +2,7 @@ import { ViewEncapsulation, forwardRef, Component, NgModule } from '@angular/cor
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AutocompleteControlComponent } from '../concerns/autocomplete.control.component';
+import { AutocompleteControlComponent } from '../concerns';
 import { IDGMatModule } from '../idg-mat.module';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
@@ -16,16 +16,31 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     template: `
         <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>{{ hint }}</mat-label>
-            <input
-                #filter
-                matInput
-                type="text"
-                autocomplete="off"
-                [value]="valueText"
-                [placeholder]="placeholder"
-                [matAutocomplete]="autocomplete"
-                (focusout)="$event.target.value = valueText"
-            />
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <ng-content select="[matPrefix]"></ng-content>
+                <div fxFlex fxLayout="column">
+                    <input
+                        #filter
+                        matInput
+                        type="text"
+                        autocomplete="off"
+                        [value]="valueText"
+                        [placeholder]="placeholder"
+                        [matAutocomplete]="autocomplete"
+                        (focusout)="$event.target.value = valueText"
+                    />
+                    <ng-content select="mat-hint"></ng-content>
+                    <ng-content select="mat-error"></ng-content>
+                </div>
+
+                <ng-content select="[matSuffix]"></ng-content>
+                <ng-content select="button"></ng-content>
+                <ng-content select="a"></ng-content>
+
+                <button mat-icon-button matSuffix *ngIf="!!value" (click)="onClear()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
         </mat-form-field>
 
         <mat-autocomplete
@@ -40,7 +55,8 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     `,
     styles: [
         `
-            :host {
+            :host,
+            idg-mat-autocomplete {
                 width: 100%;
             }
 
@@ -52,7 +68,11 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
     encapsulation: ViewEncapsulation.None
 })
-export class AutocompleteComponent extends AutocompleteControlComponent<string> {}
+export class AutocompleteComponent extends AutocompleteControlComponent<string> {
+    onClear(): void {
+        this.onSelected({ text: '', value: null, checked: false });
+    }
+}
 
 @NgModule({
     imports: [CommonModule, IDGMatModule],

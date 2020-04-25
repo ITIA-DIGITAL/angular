@@ -2,7 +2,7 @@ import { AbstractControlComponent } from './abstract.control.component';
 import { Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { IControlOptions } from '../models/control.options.interface';
+import { IControlOptions } from '../models';
 
 export abstract class SelectControlComponent<T> extends AbstractControlComponent<T> implements OnInit, OnDestroy {
     private opts: IControlOptions[];
@@ -28,7 +28,7 @@ export abstract class SelectControlComponent<T> extends AbstractControlComponent
 
         if (!this.config.asyncOptions && !this.config.options) {
             throw new Error(
-                `No options provided for ${this.config.name || this.config.hint}, neither local or async..`
+                `IDG: No options provided for ${this.config.name || this.config.hint}, neither local or async..`
             );
         }
 
