@@ -21,3 +21,8 @@ export * from './lib/concerns';
  * IDG Components models
  */
 export * from './lib/models';
+
+/**
+ * IDG Tools, like terminal
+ */
+export * from './lib/tools';
