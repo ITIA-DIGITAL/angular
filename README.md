@@ -10,21 +10,63 @@ prettier --write "**/*.ts"
 
 ## Project
 
-### idg-connect
+### idg-docs
+
+Website to describe libraries @idg/connect & @idg/mat
+To build run:
+
+```console
+ng build --prod --output-path docs --base-href ngIDG
+```
+
+### @idg/connect
 
 About the control of any data-type fetched o generated and wants too live a simple redux cycle pattern & any http server connection with data state handle.
+To update project run:
 
-## Angular basics
+```console
+npm run connect:build
+```
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+### @idg/mat
 
-### Serve
+Material control library for Angular reactive forms
+To update project run:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```console
+npm run mat:build
+```
 
-### Code scaffolding
-Run `ng generate PROJECT_NAME component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Angular
 
-### Build
+```console
+Angular CLI: 9.1.3
+Node: 13.10.1
+OS: darwin x64
 
-Run `ng PROJECT_NAME build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Angular: 9.1.3
+... animations, cli, common, compiler, compiler-cli, core, forms
+... language-service, platform-browser, platform-browser-dynamic
+... router
+Ivy Workspace: Yes
+
+Package                            Version
+------------------------------------------------------------
+@angular-devkit/architect          0.901.3
+@angular-devkit/build-angular      0.901.3
+@angular-devkit/build-ng-packagr   0.901.3
+@angular-devkit/build-optimizer    0.901.3
+@angular-devkit/build-webpack      0.901.3
+@angular-devkit/core               9.1.3
+@angular-devkit/schematics         9.1.3
+@angular/cdk                       9.2.1
+@angular/flex-layout               9.0.0-beta.29
+@angular/material                  9.2.1
+@ngtools/webpack                   9.1.3
+@schematics/angular                9.1.3
+@schematics/update                 0.901.3
+ng-packagr                         9.1.1
+rxjs                               6.5.5
+typescript                         3.8.3
+webpack                            4.42.0
+```
