@@ -11,7 +11,7 @@ ng build --prod --output-path docs --base-href angular
 ```
 
 ## Libraries
-###@ITIA-DIGITAL/connect
+### @ITIA-DIGITAL/connect
 #### Publication
 Published at GitHub Packages.
 
@@ -31,7 +31,7 @@ npm login --scope=@ITIA-DIGITAL --registry=https://npm.pkg.github.com/
 npm run connect:build
 ```
 
-###@ITIA-DIGITAL/material
+### @ITIA-DIGITAL/material
 #### Publication
 Published at GitHub Packages.
 
