@@ -34,14 +34,14 @@ export class DescriptiveComponent implements OnInit {
             displayFn: () => 'Eg. manolo@itia.mx',
             validators: [Validators.required],
             hint: 'Email component sample',
-            elementType: 'email',
+            elementType: 'email-input',
             visible: true
         },
         website: {
             placeholder: 'Type your work or personal website',
             validators: [Validators.required],
             hint: 'Url component sample',
-            elementType: 'url',
+            elementType: 'url-input',
             visible: true
         },
         gender: {
@@ -121,14 +121,14 @@ export class DescriptiveComponent implements OnInit {
             displayFn: () => 'Eg. manolo@itia.mx',
             validators: [Validators.required],
             hint: 'Email component sample',
-            elementType: 'email',
+            elementType: 'email-input',
             visible: true
         },
         website: {
             placeholder: 'Type your work or personal website',
             validators: [Validators.required],
             hint: 'Url component sample',
-            elementType: 'url',
+            elementType: 'url-input',
             visible: true
         },
         gender: {
