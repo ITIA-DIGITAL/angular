@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start": "node server.js",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
@@ -11,6 +11,9 @@
         "conn:build": "ng build idg-connect && npm i dist/idg-connect --save-optional",
         "mat:build": "ng build idg-mat && npm i dist/idg-mat --save-optional",
         "idg:build": "npm run conn:build && npm run mat:build"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
     },
     "private": true,
     "dependencies": {
@@ -54,7 +57,8 @@
     },
     "optionalDependencies": {
         "@idg/connect": "file:dist/idg-connect",
-        "@idg/mat": "file:dist/idg-mat"
+        "@idg/mat": "file:dist/idg-mat",
+        "@itia-digital/connect": "file:dist/idg-connect"
     },
     "prettier": {
         "singleQuote": true,

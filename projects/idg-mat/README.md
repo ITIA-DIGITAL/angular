@@ -1,24 +1,44 @@
-# IdgMat
+# @ITIA-DIGITAL/ng-material
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
+Material control library for Angular reactive forms
+To update project run:
 
-## Code scaffolding
+```console
+npm run mat:build
+```
 
-Run `ng generate component component-name --project idg-mat` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project idg-mat`.
-> Note: Don't forget to add `--project idg-mat` or else it will be added to the default project in your `angular.json` file. 
+## Documentation
 
-## Build
+### Angular 
 
-Run `ng build idg-mat` to build the project. The build artifacts will be stored in the `dist/` directory.
+```console
+Angular CLI: 9.1.3
+Node: 13.10.1
+OS: darwin x64
 
-## Publishing
+Angular: 9.1.3
+... animations, cli, common, compiler, compiler-cli, core, forms
+... language-service, platform-browser, platform-browser-dynamic
+... router
+Ivy Workspace: Yes
 
-After building your library with `ng build idg-mat`, go to the dist folder `cd dist/idg-mat` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test idg-mat` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Package                            Version
+------------------------------------------------------------
+@angular-devkit/architect          0.901.3
+@angular-devkit/build-angular      0.901.3
+@angular-devkit/build-ng-packagr   0.901.3
+@angular-devkit/build-optimizer    0.901.3
+@angular-devkit/build-webpack      0.901.3
+@angular-devkit/core               9.1.3
+@angular-devkit/schematics         9.1.3
+@angular/cdk                       9.2.1
+@angular/flex-layout               9.0.0-beta.29
+@angular/material                  9.2.1
+@ngtools/webpack                   9.1.3
+@schematics/angular                9.1.3
+@schematics/update                 0.901.3
+ng-packagr                         9.1.1
+rxjs                               6.5.5
+typescript                         3.8.3
+webpack                            4.42.0
+```

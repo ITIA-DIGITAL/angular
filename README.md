@@ -1,40 +1,56 @@
 # NgIDG
 This project is about deliver common code for ITIA DIGITAL's projects developed in Google Angular 9+ framework.
 
-## Develop
+## Docs
 
-Use prettier before commit
-```console
-prettier --write "**/*.ts"
-```
-
-## Project
-
-### idg-docs
-
-Website to describe libraries @idg/connect & @idg/mat
+Website to describe libraries @itia-digital/connect & @itia-digital/mat
 To build run:
 
 ```console
-ng build --prod --output-path docs --base-href ngIDG
+ng build --prod --output-path docs --base-href angular
 ```
 
-### @idg/connect
+## Libraries
+###@ITIA-DIGITAL/connect
+#### Publication
+Published at GitHub Packages.
 
-About the control of any data-type fetched o generated and wants too live a simple redux cycle pattern & any http server connection with data state handle.
-To update project run:
+```console
+ng build idg-connect --prod && cd dist/idg-connect
+npm pack && npm publish --registry=https://npm.pkg.github.com/ITIA-DIGITAL
+cd ../../
+```
 
+Important: You must be logged in with the correct token in github. (use the token as psw)
+```console
+npm login --scope=@ITIA-DIGITAL --registry=https://npm.pkg.github.com/
+```
+
+#### Build
 ```console
 npm run connect:build
 ```
 
-### @idg/mat
-
-Material control library for Angular reactive forms
-To update project run:
+###@ITIA-DIGITAL/material
+#### Publication
+Published at GitHub Packages.
 
 ```console
+ng build idg-mat --prod && cd dist/idg-mat
+npm pack && npm publish --registry=https://npm.pkg.github.com/ITIA-DIGITAL
+cd ../../
+```
+
+#### Build
+```console
 npm run mat:build
+```
+
+## For developers
+
+Use prettier before commit
+```console
+prettier --write "**/*.ts"
 ```
 
 ## Angular

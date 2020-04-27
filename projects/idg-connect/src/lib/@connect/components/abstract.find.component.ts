@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Input, OnDestroy, OnInit } from '@angular/core';
 
 import { switchMap, take } from 'rxjs/operators';
