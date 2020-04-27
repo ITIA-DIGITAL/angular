@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsComponent } from './forms.component';
 
 import {
-    IDGMatModule,
     InputEmailComponentModule,
-    InputModule,
+    AutocompletesModule,
+    AutocompleteModule,
+    DatePickerModule,
+    FilePickerModule,
     TextareaModule,
     TerminalModule,
-    SelectModule,
-    AutocompleteModule,
     InputUrlModule,
-    AutocompletesModule,
-    DatePickerModule,
-    FilePickerModule
-} from '@idg/mat';
+    IDGMatModule,
+    SelectModule,
+    InputModule
+} from '@itia-digital/material';
 import { FormsRouting } from './forms.routing';
 import { DescriptiveComponent } from './descriptive/descriptive.component';
 

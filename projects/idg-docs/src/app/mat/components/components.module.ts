@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ComponentsComponent } from './components.component';
 import { ComponentsRouting } from './components.routing';
-import { IDGMatModule } from '@idg/mat';
+import { IDGMatModule } from '@itia-digital/material';
 
 @NgModule({
     declarations: [ComponentsComponent],

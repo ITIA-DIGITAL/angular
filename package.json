@@ -60,9 +60,8 @@
         "typescript": "~3.8.3"
     },
     "optionalDependencies": {
-        "@idg/connect": "file:dist/idg-connect",
-        "@idg/mat": "file:dist/idg-mat",
-        "@itia-digital/connect": "file:dist/idg-connect"
+        "@itia-digital/connect": "file:dist/idg-connect",
+        "@itia-digital/material": "file:dist/idg-mat"
     },
     "prettier": {
         "singleQuote": true,
