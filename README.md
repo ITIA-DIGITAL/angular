@@ -46,6 +46,22 @@ cd ../../
 npm run mat:build
 ```
 
+## Deployment: Heroku
+a. Create app :
+
+```
+heroku create APP_NAME
+OR: heroku config:set NODE_MODULES_CACHE=false --remote APP_NAME
+```
+
+b. Add git remote name
+
+```
+git remote add APP_NAME https://git.heroku.com/APP_NAME.git
+git push APP_NAME master
+```
+
+
 ## For developers
 
 Use prettier before commit

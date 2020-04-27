@@ -90,7 +90,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/idg-docs",
+                        "outputPath": "dist/itia",
                         "index": "projects/idg-docs/src/index.html",
                         "main": "projects/idg-docs/src/main.ts",
                         "polyfills": "projects/idg-docs/src/polyfills.ts",
