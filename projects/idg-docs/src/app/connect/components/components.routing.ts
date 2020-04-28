@@ -11,6 +11,10 @@ const routes: Routes = [
             {
                 path: 'table-sample',
                 component: TableComponent
+            },
+            {
+                path: '**',
+                redirectTo: '/connect/components/table-sample'
             }
         ]
     },

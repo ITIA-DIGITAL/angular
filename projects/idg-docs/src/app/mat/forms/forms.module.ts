@@ -13,13 +13,15 @@ import {
     InputUrlModule,
     IDGMatModule,
     SelectModule,
-    InputModule
+    InputModule,
+    FormModule
 } from '@itia-digital/material';
 import { FormsRouting } from './forms.routing';
+import { WrapperComponent } from './wrapper/wrapper.component';
 import { DescriptiveComponent } from './descriptive/descriptive.component';
 
 @NgModule({
-    declarations: [FormsComponent, DescriptiveComponent],
+    declarations: [FormsComponent, DescriptiveComponent, WrapperComponent],
     imports: [
         CommonModule,
         FormsRouting,
@@ -34,7 +36,8 @@ import { DescriptiveComponent } from './descriptive/descriptive.component';
         InputUrlModule,
         AutocompletesModule,
         DatePickerModule,
-        FilePickerModule
+        FilePickerModule,
+        FormModule
     ]
 })
 export class FormsModule {}

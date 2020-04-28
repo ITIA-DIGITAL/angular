@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { FormsComponent } from './forms.component';
+import { WrapperComponent } from './wrapper/wrapper.component';
 import { DescriptiveComponent } from './descriptive/descriptive.component';
 
 const routes: Routes = [
@@ -11,6 +13,14 @@ const routes: Routes = [
             {
                 path: 'descriptive',
                 component: DescriptiveComponent
+            },
+            {
+                path: 'wrapper',
+                component: WrapperComponent
+            },
+            {
+                path: '**',
+                redirectTo: '/material/forms/descriptive'
             }
         ]
     },

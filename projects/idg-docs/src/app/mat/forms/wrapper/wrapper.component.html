@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            HTML descriptive
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-tab-group>
+            <mat-tab label="Form">
+                <div class="tab-content" fxLayout="row">
+                    <div fxFlex>
+                        <ng-container *ngTemplateOutlet="descriptiveForm"></ng-container>
+                    </div>
+                    <div fxFlex>
+                        <idg-mat-terminal title="Result" [code]="form.value | json"></idg-mat-terminal>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="HTML">
+                <div class="tab-content">
+                    <idg-mat-terminal title="Code" [code]="html"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+            <mat-tab label="TS">
+                <div class="tab-content">
+                    <idg-mat-terminal title="Code" [code]="ts"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #descriptiveForm>
+    <idg-mat-form [form]="form"></idg-mat-form>
+</ng-template>
