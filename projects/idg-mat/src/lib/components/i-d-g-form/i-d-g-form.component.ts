@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { IDGFormGroup } from '../../models/i-d-g-form-group';
+import { IDGFormGroup } from '../../models';
 
 @Component({
     selector: 'idg-mat-form',
-    templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss'],
+    templateUrl: './i-d-g-form.component.html',
+    styleUrls: ['./i-d-g-form.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FormComponent implements OnInit {
+export class IDGFormComponent implements OnInit {
     @Input() form: IDGFormGroup;
 
     get controlNames(): string[] {

@@ -2,9 +2,9 @@ import { Component, OnInit, NgModule, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { SelectControlComponent } from '../concerns/select.control.component';
-import { IControlOptions } from '../models/control.options.interface';
+import { SelectControlComponent } from '../concerns';
 import { IDGMatModule } from '../idg-mat.module';
+import { IControlOptions } from '../models';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,

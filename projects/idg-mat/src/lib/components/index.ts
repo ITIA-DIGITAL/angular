@@ -9,5 +9,6 @@ export * from './textarea.component.module';
 export * from './select.component.module';
 export * from './input.component.module';
 export * from './file-picker';
-export * from './control';
-export * from './form';
+
+export * from './i-d-g-control';
+export * from './i-d-g-form';

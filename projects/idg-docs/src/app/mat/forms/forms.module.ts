@@ -11,10 +11,11 @@ import {
     TextareaModule,
     TerminalModule,
     InputUrlModule,
-    IDGMatModule,
     SelectModule,
     InputModule,
-    FormModule
+    IDGControlModule,
+    IDGFormModule,
+    IDGMatModule
 } from '@itia-digital/material';
 import { FormsRouting } from './forms.routing';
 import { WrapperComponent } from './wrapper/wrapper.component';
@@ -26,18 +27,19 @@ import { DescriptiveComponent } from './descriptive/descriptive.component';
         CommonModule,
         FormsRouting,
 
-        IDGMatModule,
-        InputModule,
-        TerminalModule,
-        TextareaModule,
         InputEmailComponentModule,
-        SelectModule,
-        AutocompleteModule,
-        InputUrlModule,
         AutocompletesModule,
+        AutocompleteModule,
         DatePickerModule,
         FilePickerModule,
-        FormModule
+        TerminalModule,
+        TextareaModule,
+        InputUrlModule,
+        SelectModule,
+        InputModule,
+        IDGControlModule,
+        IDGFormModule,
+        IDGMatModule
     ]
 })
 export class FormsModule {}

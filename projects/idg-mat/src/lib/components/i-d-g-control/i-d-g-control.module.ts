@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatDividerModule } from '@angular/material/divider';
 
 import { InputEmailComponentModule } from '../input.email.component.module';
 import { AutocompletesModule } from '../autocompletes.component.module';
@@ -14,8 +11,9 @@ import { TextareaModule } from '../textarea.component.module';
 import { CheckboxModule } from '../checkbox.component.module';
 import { SelectModule } from '../select.component.module';
 import { InputModule } from '../input.component.module';
-import { ControlComponent } from './control.component';
+import { IDGControlComponent } from './i-d-g-control.component';
 import { FilePickerModule } from '../file-picker';
+
 import { IDGMatModule } from '../../idg-mat.module';
 
 @NgModule({
@@ -36,7 +34,7 @@ import { IDGMatModule } from '../../idg-mat.module';
         SelectModule,
         InputModule
     ],
-    declarations: [ControlComponent],
-    exports: [ControlComponent]
+    declarations: [IDGControlComponent],
+    exports: [IDGControlComponent]
 })
-export class ControlModule {}
+export class IDGControlModule {}

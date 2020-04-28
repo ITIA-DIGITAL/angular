@@ -1,5 +1,5 @@
 import { EventEmitter, HostListener, Directive, Output, Input } from '@angular/core';
-import { fileType, FileTypes } from '../../models/file.type';
+import { fileType, FileTypes } from '../../models';
 
 @Directive({
     selector: '[idgMatDropFiles]'
