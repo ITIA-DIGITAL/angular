@@ -1,6 +1,6 @@
-import { Component, OnInit, NgModule, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, NgModule, forwardRef, Optional, SkipSelf, Host } from '@angular/core';
 
 import { SelectControlComponent } from '../concerns';
 import { IDGMatModule } from '../idg-mat.module';
@@ -45,6 +45,15 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR]
 })
 export class CheckboxListComponent extends SelectControlComponent<string[]> implements OnInit {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     toggle(event: IControlOptions): void {
         const index = this.value.indexOf(event.value);
         if (index >= 0) {

@@ -1,10 +1,20 @@
+import { ControlContainer } from '@angular/forms';
 import { AbstractControlComponent } from './abstract.control.component';
-import { Input, OnDestroy, OnInit } from '@angular/core';
+import { Host, Input, OnDestroy, OnInit, Optional, SkipSelf } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { IControlOptions } from '../models';
 
 export abstract class SelectControlComponent<T> extends AbstractControlComponent<T> implements OnInit, OnDestroy {
+    protected constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     private opts: IControlOptions[];
     get options(): IControlOptions[] {
         return this.opts;

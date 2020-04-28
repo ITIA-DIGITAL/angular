@@ -1,6 +1,6 @@
-import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Component, forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, forwardRef, Host, NgModule, Optional, SkipSelf } from '@angular/core';
+import { AbstractControl, ControlContainer, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
 import { AbstractControlComponent } from '../concerns';
 import { emailRegEx as regex } from '../models/regex';
@@ -59,6 +59,15 @@ const IDG_MAT_NG_VALIDATORS = {
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR, IDG_MAT_NG_VALIDATORS]
 })
 export class InputEmailComponent extends AbstractControlComponent<string> implements Validator {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     validate(c: AbstractControl) {
         if (!c.value) return null;
 

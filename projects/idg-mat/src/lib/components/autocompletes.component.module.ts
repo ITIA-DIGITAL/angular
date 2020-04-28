@@ -1,7 +1,17 @@
-import { ViewEncapsulation, Component, NgModule, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import {
+    ViewEncapsulation,
+    forwardRef,
+    OnDestroy,
+    OnInit,
+    Component,
+    NgModule,
+    Optional,
+    SkipSelf,
+    Host
+} from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AutocompleteControlComponent } from '../concerns';
@@ -72,6 +82,15 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     encapsulation: ViewEncapsulation.None
 })
 export class AutocompletesComponent extends AutocompleteControlComponent<string[]> implements OnInit, OnDestroy {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     ngOnInit(): void {
         super.ngOnInit();
     }

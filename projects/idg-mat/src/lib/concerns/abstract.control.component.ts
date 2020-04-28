@@ -1,36 +1,33 @@
-import { EventEmitter, Host, Input, OnDestroy, OnInit, Optional, Output, SkipSelf } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Host,
+    Injectable,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    SkipSelf
+} from '@angular/core';
 import { ControlContainer, ControlValueAccessor } from '@angular/forms';
 
 import { IControlComponent, IControlConfig, IDGFormControl } from '../models';
-/*
-ngControl: NgControl;
 
-    constructor(public injector: Injector) {
-        super();
-    }
-    ngOnInit(): void {
-        this.ngControl = this.injector.get(NgControl);
-        if (this.ngControl != null) {
-            this.ngControl.valueAccessor = this;
-        }
-        console.log(this);
-        // super.ngOnInit();
-    }
- */
 export abstract class AbstractControlComponent<T>
     implements IControlComponent, ControlValueAccessor, OnInit, OnDestroy {
+    protected constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {}
+
     @Input() formControlName: string;
     @Input() config: IControlConfig;
     @Input() name: string;
 
     control: IDGFormControl;
-
-    constructor(
-        @Optional()
-        @SkipSelf()
-        @Host()
-        private controlContainer: ControlContainer
-    ) {}
 
     // UI, props
     placeholder: string;

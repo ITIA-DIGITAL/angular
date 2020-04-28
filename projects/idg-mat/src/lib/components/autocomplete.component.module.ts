@@ -1,5 +1,5 @@
-import { ViewEncapsulation, forwardRef, Component, NgModule } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ViewEncapsulation, forwardRef, Component, NgModule, Optional, SkipSelf, Host } from '@angular/core';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AutocompleteControlComponent } from '../concerns';
@@ -69,6 +69,15 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     encapsulation: ViewEncapsulation.None
 })
 export class AutocompleteComponent extends AutocompleteControlComponent<string> {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     onClear(): void {
         this.onSelected({ text: '', value: null, checked: false });
     }

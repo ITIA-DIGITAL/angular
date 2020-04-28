@@ -11,7 +11,10 @@
         "heroku-postbuild": "ng build --aot --prod",
         "conn:build": "ng build idg-connect && npm i dist/idg-connect --save-optional",
         "mat:build": "ng build idg-mat && npm i dist/idg-mat --save-optional",
-        "idg:build": "npm run conn:build && npm run mat:build"
+        "idg:build": "npm run conn:build && npm run mat:build",
+        "conn:build:prod": "ng build idg-connect --prod && npm i dist/idg-connect --save-optional",
+        "mat:build:prod": "ng build idg-mat --prod && npm i dist/idg-mat --save-optional",
+        "idg:build:prod": "npm run conn:build:prod && npm run mat:build:prod"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"

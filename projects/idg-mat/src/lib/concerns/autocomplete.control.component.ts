@@ -1,14 +1,24 @@
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { ElementRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ElementRef, ViewChild, OnDestroy, OnInit, Optional, SkipSelf, Host } from '@angular/core';
 
 import { fromEvent, isObservable, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { SelectControlComponent } from './select.control.component';
-import { IControlOptions } from '../models/control.options.interface';
+import { IControlOptions } from '../models';
 
 export abstract class AutocompleteControlComponent<T> extends SelectControlComponent<T> implements OnInit, OnDestroy {
+    protected constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     @ViewChild('filter', { static: true })
     filter: ElementRef;
 

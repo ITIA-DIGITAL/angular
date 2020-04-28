@@ -1,10 +1,10 @@
-import { Component, forwardRef, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Host, NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { IDGMatModule } from '../idg-mat.module';
-import { AbstractControlComponent } from '../concerns/abstract.control.component';
+import { AbstractControlComponent } from '../concerns';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -53,7 +53,16 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     ],
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR]
 })
-export class InputComponent extends AbstractControlComponent<string> {}
+export class InputComponent extends AbstractControlComponent<string> {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+}
 
 @NgModule({
     imports: [CommonModule, FlexLayoutModule, IDGMatModule],

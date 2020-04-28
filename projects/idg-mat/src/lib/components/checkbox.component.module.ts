@@ -1,8 +1,8 @@
-import { Component, forwardRef, NgModule } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Host, NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { AbstractControlComponent } from '../concerns/abstract.control.component';
+import { AbstractControlComponent } from '../concerns';
 import { IDGMatModule } from '../idg-mat.module';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
@@ -36,7 +36,16 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     ],
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR]
 })
-export class CheckboxComponent extends AbstractControlComponent<boolean> {}
+export class CheckboxComponent extends AbstractControlComponent<boolean> {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+}
 
 @NgModule({
     imports: [CommonModule, IDGMatModule],

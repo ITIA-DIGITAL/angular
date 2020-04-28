@@ -1,5 +1,5 @@
-import { ViewEncapsulation, forwardRef, Component } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ViewEncapsulation, forwardRef, Component, Optional, SkipSelf, Host } from '@angular/core';
 
 import { AbstractControlComponent } from '../../concerns';
 
@@ -17,6 +17,15 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     encapsulation: ViewEncapsulation.None
 })
 export class IDGControlComponent extends AbstractControlComponent<string | string[] | boolean | File[]> {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        @Host()
+        public controlContainer: ControlContainer
+    ) {
+        super(controlContainer);
+    }
+
     /**
      * ValueChanges proxy to handles each fileType of control
      */
