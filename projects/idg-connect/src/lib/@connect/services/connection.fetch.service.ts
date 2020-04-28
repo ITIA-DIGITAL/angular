@@ -55,28 +55,34 @@ export abstract class ConnectionFetchService<
     /***
      * Q U E R Y   Z O N E
      */
+    /**
+     * Set query state
+     * @param q, must be new QUERY
+     */
     queryChanged(q: QUERY): void {
-        q.pageIndex = 0;
         this.setQuery(q);
     }
 
-    queryStringChanged(text: string): void {
-        const q = this.Query;
-        q.q = text;
-        this.queryChanged(q);
+    pageIndexChanged(pageIndex: number): void {
+        this.setQuery(this.Query.duplicate({ pageIndex }) as QUERY);
     }
 
-    pageIndexChanged(index: number): void {
-        const q = this.Query;
-        q.pageIndex = index;
-        this.queryChanged(q);
+    queryStringChanged(q: string): void {
+        this.setQuery(this.Query.duplicate({ pageIndex: 0, q }) as QUERY);
     }
 
-    pageSizeChanged(size: number): void {
-        const q = this.Query;
-        q.pageSize = size;
-        this.queryChanged(q);
+    pageSizeChanged(pageSize: number): void {
+        this.setQuery(this.Query.duplicate({ pageIndex: 0, pageSize }) as QUERY);
     }
+
+    orderByChanged(orderBy: any): void {
+        this.setQuery(this.Query.duplicate({ pageIndex: 0, orderBy }) as QUERY);
+    }
+
+    baseUrlChanged(baseUrl: string): void {
+        this.setQuery(this.Query.duplicate({ pageIndex: 0, baseUrl }) as QUERY);
+    }
+
     /**
      * If set is done will subscribe to Query changes,
      * and emmit the Count$ and List$.

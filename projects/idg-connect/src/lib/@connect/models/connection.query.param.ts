@@ -25,6 +25,10 @@ export class ConnectionQueryParam {
         this.q = o.q || '';
     }
 
+    duplicate(d?: ConnectionQueryParam | any): ConnectionQueryParam {
+        return new ConnectionQueryParam({ ...this, ...(d || {}) });
+    }
+
     /**
      * Convert params to query params part of a url string
      */

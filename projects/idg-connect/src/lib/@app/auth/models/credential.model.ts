@@ -1,6 +1,6 @@
 import { ConnectionQueryParam, IData } from '../../../@connect/models';
-import { Tenant } from '../../tenant/models/tenant.model';
-import { CredentialStatus } from '../enums/status.enum';
+import { Tenant } from '../../tenant/models';
+import { CredentialStatus } from '../enums';
 
 export interface Credential extends IData {
     status: CredentialStatus;
