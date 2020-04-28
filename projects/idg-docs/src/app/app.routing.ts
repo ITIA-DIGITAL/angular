@@ -7,8 +7,12 @@ const routes: Routes = [
         loadChildren: () => import('./mat/mat.module').then(m => m.MatModule)
     },
     {
+        path: 'connect',
+        loadChildren: () => import('./connect/connect.module').then(m => m.ConnectModule)
+    },
+    {
         path: '**',
-        redirectTo: '/material'
+        redirectTo: '/material/forms/descriptive'
     }
 ];
 

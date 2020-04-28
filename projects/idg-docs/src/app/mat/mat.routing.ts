@@ -7,12 +7,8 @@ const routes: Routes = [
         loadChildren: () => import('./forms/forms.module').then(m => m.FormsModule)
     },
     {
-        path: 'components',
-        loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule)
-    },
-    {
-        path: '',
-        redirectTo: '/material/forms'
+        path: '**',
+        redirectTo: '/material/forms/descriptive'
     }
 ];
 

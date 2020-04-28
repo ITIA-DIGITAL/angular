@@ -1,0 +1,65 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Abstract Table Component implementation
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-tab-group>
+            <mat-tab label="Form">
+                <div class="tab-content">
+                    <ng-container *ngTemplateOutlet="code"></ng-container>
+                </div>
+            </mat-tab>
+            <mat-tab label="HTML">
+                <div class="tab-content">
+                    <idg-mat-terminal title="Code" [code]="html"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+            <mat-tab label="TS">
+                <div class="tab-content">
+                    <idg-mat-terminal title="Code" [code]="ts"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+            <mat-tab label="Data Source">
+                <div class="tab-content">
+                    <idg-mat-terminal title="DataSource" [code]="service.List$ | async | json"></idg-mat-terminal>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #code>
+    <mat-table #table [dataSource]="dataSource">
+        <!-- code Column -->
+        <ng-container matColumnDef="code">
+            <mat-header-cell *matHeaderCellDef>Código</mat-header-cell>
+            <mat-cell *matCellDef="let item">
+                {{ item.code }}
+            </mat-cell>
+        </ng-container>
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
+            <mat-cell *matCellDef="let item">
+                {{ item.title }}
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let contact; columns: displayedColumns" class="contact" matRipple> </mat-row>
+    </mat-table>
+
+    <mat-paginator
+        #paginator
+        [length]="service.Count$ | async"
+        [pageIndex]="(service.Query$ | async).pageIndex"
+        [pageSize]="(service.Query$ | async).pageSize"
+        (page)="onPage($event)"
+    >
+    </mat-paginator>
+
+    <mat-progress-bar mode="query" color="accent" *ngIf="service.Working$ | async"></mat-progress-bar>
+</ng-template>
