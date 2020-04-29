@@ -43,8 +43,6 @@ export abstract class AbstractControlComponent<T>
     disabled: boolean;
 
     ngOnInit(): void {
-        console.log(this);
-
         if (!this.config) {
             if (this.controlContainer) {
                 if (this.formControlName) {

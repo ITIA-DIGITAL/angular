@@ -1,52 +1,73 @@
-@import '../../../../node_modules/@angular/material/theming';
-
 // mixin name will be used in main style.scss
 @mixin idg-mat-components-theme($theme) {
-    $warn: map-get($theme, warn);
-    $warn-color: mat-color($warn);
+  $warn: map-get($theme, warn);
+  $warn-color: mat-color($warn);
 
-    $background: map-get($theme, background);
-    $background-color: map-get($background, 'card');
+  $background: map-get($theme, background);
+  $background-color: map-get($background, 'card');
 
-    idg-mat-input-url,
-    idg-mat-input-email,
-    idg-mat-autocompletes {
-        .mat-form-field-appearance-outline .mat-form-field-infix {
-            padding: 0.4em 0 !important;
-            min-height: 32px;
-        }
+  idg-mat-input-url,
+  idg-mat-input-email,
+  idg-mat-autocompletes {
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+      padding: 0.4em 0 !important;
+      min-height: 32px;
+    }
+  }
+
+  idg-mat-select {
+    .mat-form-field.mat-form-field-type-mat-select
+    .mat-form-field-infix
+    .mat-select-trigger {
+      padding: 28px 0;
     }
 
-    idg-mat-input-email,
-    idg-mat-date-picker,
-    idg-mat-file-picker,
-    idg-mat-input-url,
-    idg-mat-textarea,
-    idg-mat-select,
-    idg-mat-input,
-    idg-mat-control {
-        &.ng-invalid {
-            mat-label {
-                background-color: $background-color !important;
-                color: $warn-color !important;
-                padding: 0 2px;
-            }
-
-            mat-icon {
-                color: $warn-color !important;
-            }
-
-            .mat-card {
-                border-color: $warn-color !important;
-            }
-
-            .mat-form-field-outline {
-                .mat-form-field-outline-start,
-                .mat-form-field-outline-gap,
-                .mat-form-field-outline-end {
-                    border-color: $warn-color !important;
-                }
-            }
-        }
+    .mat-form-field-label-wrapper {
+      top: -5px;
     }
+  }
+
+  idg-mat-input-email,
+  idg-mat-date-picker,
+  idg-mat-file-picker,
+  idg-mat-input-url,
+  idg-mat-textarea,
+  idg-mat-select,
+  idg-mat-input,
+  idg-mat-control {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    &.ng-invalid {
+      mat-label {
+        background-color: $background-color !important;
+        color: $warn-color !important;
+        padding: 0 2px;
+      }
+
+      mat-icon {
+        color: $warn-color !important;
+      }
+
+      .mat-card {
+        border-color: $warn-color !important;
+      }
+
+      .mat-form-field-outline {
+        .mat-form-field-outline-start,
+        .mat-form-field-outline-gap,
+        .mat-form-field-outline-end {
+          border-color: $warn-color !important;
+        }
+      }
+    }
+  }
+}
+
+/** General fix **/
+.mat-form-field.mat-form-field-type-mat-select
+.mat-form-field-infix
+.mat-select-trigger {
+  padding: 24px 0;
 }

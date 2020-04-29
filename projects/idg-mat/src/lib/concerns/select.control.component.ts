@@ -23,6 +23,10 @@ export abstract class SelectControlComponent<T> extends AbstractControlComponent
     set options(value) {
         this.opts = [...value];
 
+        if (!!this.config && !this.config.forceSelection) {
+            this.opts = [{ value: null, text: '---' }, ...value];
+        }
+
         if (Array.isArray(this.value)) {
             const selection: any[] = this.value;
             for (const option of this.options) {
