@@ -6,6 +6,7 @@ export class ConnectionQueryParam {
     pageIndex: number | string;
     pageSize: number | string;
     accumulate: boolean;
+    childUrl: string;
     orderBy: object;
     format: Format;
     token: string;
@@ -18,6 +19,7 @@ export class ConnectionQueryParam {
         this.pageIndex = o.pageIndex || 0;
         this.pageSize = o.pageSize || 10;
         this.orderBy = o.orderBy || null;
+        this.childUrl = o.childUrl || '';
         this.accumulate = o.accumulate;
         this.baseUrl = o.baseUrl || '';
         this.useCache = o.useCache;

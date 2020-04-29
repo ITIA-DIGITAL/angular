@@ -15,6 +15,7 @@ export function toQueryParams(param: any, dateFormat?: string): string {
             param[prop] !== '' &&
             prop !== 'pageIndex' &&
             prop !== 'pageSize' &&
+            prop !== 'childUrl' &&
             prop !== 'useCache' &&
             prop !== 'baseUrl' &&
             prop !== 'format' &&
@@ -42,6 +43,10 @@ export function toQueryParams(param: any, dateFormat?: string): string {
                 q.push('page_size=' + param[prop]);
             }
         }
+    }
+
+    if (param.childUrl) {
+        return `${param.childUrl}?${q.join('&')}`;
     }
 
     return `?${q.join('&')}`;
