@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { StoreService } from '../../@connect/services';
 import { NotificationType } from '../enums';
 import { Notification } from '../models';
 import { select$ } from '../../@rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class NotificationsService extends StoreService<Notification[]> {
+@Injectable()
+export class IDGNotificationsService extends StoreService<Notification[]> {
     private remote2XX$: Observable<Notification[]>;
     private remote400$: Observable<Notification[]>;
     private remote401$: Observable<Notification[]>;
@@ -69,12 +68,16 @@ export class NotificationsService extends StoreService<Notification[]> {
         return this.success$;
     }
 
-    constructor() {
+    constructor(public snack: MatSnackBar) {
         super([]);
     }
 
-    add(n: Notification) {
+    add(n: Notification, emit = false) {
         this.set([n, ...this.State]);
+
+        this.snack.open(n.message, 'OK', {
+            duration: 4000
+        });
     }
 
     remove(n: Notification) {
@@ -85,3 +88,8 @@ export class NotificationsService extends StoreService<Notification[]> {
         this.set([]);
     }
 }
+
+@NgModule({
+    providers: [IDGNotificationsService]
+})
+export class IDGNotificationsModule {}

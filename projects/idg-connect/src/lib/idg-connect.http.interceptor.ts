@@ -1,18 +1,19 @@
 import {
     HTTP_INTERCEPTORS,
     HttpErrorResponse,
-    HttpEvent,
     HttpHandler,
+    HttpRequest,
     HttpInterceptor,
-    HttpRequest
+    HttpEvent
 } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 
-import { catchError, delay, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { NotificationsService } from './@notifications/services';
+import { IDGNotificationsService } from './@notifications/services';
 import { NotificationIcon, NotificationType } from './@notifications/enums';
+import { msgFrom422 } from './@notifications/functions';
 
 /**
  * Checkout:
@@ -20,7 +21,7 @@ import { NotificationIcon, NotificationType } from './@notifications/enums';
  */
 @Injectable()
 export class IDGConnectHttpInterceptor implements HttpInterceptor {
-    constructor(private notifications: NotificationsService) {}
+    constructor(private notifications: IDGNotificationsService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(
@@ -32,6 +33,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                         type: NotificationType.Error,
                         icon: NotificationIcon.Error,
                         message: error.error.error,
+                        durationMs: 3000,
                         raw: error.error,
                         code: 'LOCAL',
                         id: null
@@ -43,17 +45,44 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                             ? NotificationType.Remote5XX
                             : error.status === 422
                             ? NotificationType.Remote422
+                            : error.status === 400
+                            ? NotificationType.Remote400
+                            : error.status === 401
+                            ? NotificationType.Remote401
                             : NotificationType.Unknown;
+                    const icon: NotificationIcon =
+                        error.status >= 500
+                            ? NotificationIcon.Bug
+                            : error.status === 422
+                            ? NotificationIcon.Data
+                            : error.status === 401
+                            ? NotificationIcon.Auth
+                            : error.status === 400
+                            ? NotificationIcon.SyncError
+                            : NotificationIcon.Cloud;
+                    const message: string =
+                        error.status >= 500
+                            ? `${error.status} Remote bug found, check log for more details.. T_T`
+                            : error.status === 422
+                            ? `${msgFrom422(error.error)}.. \O/`
+                            : error.status === 401
+                            ? 'Close session and retry.. :/'
+                            : error.status === 400
+                            ? 'Not very good request.. :('
+                            : `${error.error ? error.error.error : error.statusText}.. :S`;
 
                     // server-side error
                     this.notifications.add({
-                        message: error.error ? error.error.error : error.statusText,
-                        icon: NotificationIcon.ConnectionError,
                         code: error.status,
+                        durationMs: 3000,
                         raw: error,
                         id: null,
-                        type
+                        message,
+                        type,
+                        icon
                     });
+
+                    console.error(error.error ? error.error.error : error.statusText);
                     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
                 }
                 return throwError(errorMessage);
