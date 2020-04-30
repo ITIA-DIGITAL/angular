@@ -25,7 +25,7 @@ export function toQueryParams(param: any, dateFormat?: string): string {
                 try {
                     if (param[prop]._isAMomentObject) {
                         q.push(prop.toLowerCase() + '=' + param[prop].format(dateFormat || DEFAULT_DATE_FORMAT));
-                    } else if (isArrayLike(param[prop]) && param[prop]['foreEach']) {
+                    } else if (isArrayLike(param[prop])) {
                         const arr = [];
                         param[prop].forEach((value: string) => {
                             arr.push(`${prop}[]=${value}`);
