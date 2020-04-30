@@ -10,7 +10,7 @@ import { NotificationType } from '../enums';
 import { Notification } from '../models';
 
 @Component({
-    selector: 'idg-connect-message',
+    selector: 'idg-connect-notification',
     template: `
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <mat-icon fxFlex="10%" [color]="color">{{ data.icon }}</mat-icon>

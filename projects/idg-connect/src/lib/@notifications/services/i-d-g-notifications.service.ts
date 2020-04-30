@@ -88,8 +88,3 @@ export class IDGNotificationsService extends StoreService<Notification[]> {
         this.set([]);
     }
 }
-
-@NgModule({
-    providers: [IDGNotificationsService]
-})
-export class IDGNotificationsModule {}

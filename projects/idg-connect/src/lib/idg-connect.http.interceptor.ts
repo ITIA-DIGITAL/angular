@@ -64,7 +64,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                         error.status >= 500
                             ? `${error.status} Remote bug found, check log for more details.. T_T`
                             : error.status === 422
-                            ? `${msgFrom422(error.error)}.. \O/`
+                            ? `${msgFrom422(error.error)}.. \\O/`
                             : error.status === 401
                             ? 'Close session and retry.. :/'
                             : error.status === 400
@@ -82,7 +82,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                         icon
                     });
 
-                    console.error(error.error ? error.error.error : error.statusText);
+                    console.error(error.error ? error.error : error.statusText);
                     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
                 }
                 return throwError(errorMessage);
