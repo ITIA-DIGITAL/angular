@@ -44,10 +44,3 @@ export class IDGNotificationComponent {
         }
     }
 }
-
-@NgModule({
-    imports: [CommonModule, MatButtonModule, MatIconModule, FlexModule],
-    declarations: [IDGNotificationComponent],
-    exports: [IDGNotificationComponent]
-})
-export class IDGNotificationComponentModule {}
