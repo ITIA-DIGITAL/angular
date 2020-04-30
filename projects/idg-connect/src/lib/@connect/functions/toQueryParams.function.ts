@@ -22,15 +22,19 @@ export function toQueryParams(param: any, dateFormat?: string): string {
             prop !== 'orderBy'
         ) {
             if (param[prop].toString().toLowerCase() !== 'false') {
-                if (param[prop]._isAMomentObject) {
-                    q.push(prop.toLowerCase() + '=' + param[prop].format(dateFormat || DEFAULT_DATE_FORMAT));
-                } else if (isArrayLike(param[prop])) {
-                    const arr = [];
-                    param[prop].forEach((value: string) => {
-                        arr.push(`${prop}[]=${value}`);
-                    });
-                    q.push(arr.join('&'));
-                } else {
+                try {
+                    if (param[prop]._isAMomentObject) {
+                        q.push(prop.toLowerCase() + '=' + param[prop].format(dateFormat || DEFAULT_DATE_FORMAT));
+                    } else if (isArrayLike(param[prop]) && param[prop]['foreEach']) {
+                        const arr = [];
+                        param[prop].forEach((value: string) => {
+                            arr.push(`${prop}[]=${value}`);
+                        });
+                        q.push(arr.join('&'));
+                    } else {
+                        q.push(prop.toLowerCase() + '=' + param[prop]);
+                    }
+                } catch (e) {
                     q.push(prop.toLowerCase() + '=' + param[prop]);
                 }
             }
@@ -43,10 +47,6 @@ export function toQueryParams(param: any, dateFormat?: string): string {
                 q.push('page_size=' + param[prop]);
             }
         }
-    }
-
-    if (param.childUrl) {
-        return `${param.childUrl}?${q.join('&')}`;
     }
 
     return `?${q.join('&')}`;

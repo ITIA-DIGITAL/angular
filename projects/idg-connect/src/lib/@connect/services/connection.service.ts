@@ -35,7 +35,8 @@ export abstract class ConnectionService<
      * @param q (used for parent/child url context replaces)
      */
     post(d: MODEL, q?: QUERY): Observable<MODEL> {
-        const url = toUrl(this.config, q || this.Query, q.childUrl);
+        const query = q || this.Query;
+        const url = toUrl(this.config, query, query.childUrl);
         this.setWorking(true);
 
         return this.httpClient
@@ -49,7 +50,8 @@ export abstract class ConnectionService<
      * @param q (used for parent/child url context replaces)
      */
     patch(d: MODEL, q?: QUERY): Observable<MODEL> {
-        const url = toUrl(this.config, q || this.Query, q.childUrl || `/${d.id}`);
+        const query = q || this.Query;
+        const url = toUrl(this.config, query, query.childUrl || `/${d.id}`);
         this.setWorking(true);
 
         return this.httpClient
@@ -63,7 +65,8 @@ export abstract class ConnectionService<
      * @param q (used for parent/child url context replaces)
      */
     delete(id: number | string, q?: QUERY): Observable<any> {
-        const url = toUrl(this.config, q || this.Query, q.childUrl || `/${id}`);
+        const query = q || this.Query;
+        const url = toUrl(this.config, query, query.childUrl || `/${id}`);
         this.setWorking(true);
 
         return this.httpClient.delete(url).pipe(this.finalizeConnection());
