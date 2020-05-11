@@ -1,4 +1,4 @@
-export * as functions from './functions';
+export * from './functions';
 
 export * from './retryWithBackoff';
 export * from './select$';
