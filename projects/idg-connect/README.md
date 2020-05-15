@@ -1,13 +1,20 @@
 # @ITIA-DIGITAL/ng-connect
 
 About the control of any data-type fetched o generated and wants too live a simple redux cycle pattern & any http server connection with data state handle.
+
+## Publish
+
+```console
+ng build idg-connect --prod && cd dist/idg-connect && npm pack && npm publish --registry=https://npm.pkg.github.com/ITIA-DIGITAL && cd ../../
+```
+
+## Documentation
+
 To update project run:
 
 ```console
 npm run conn:build
 ```
-
-## Documentation
 
 ### Angular 
 

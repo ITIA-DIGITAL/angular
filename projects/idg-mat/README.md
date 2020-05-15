@@ -1,13 +1,20 @@
 # @ITIA-DIGITAL/ng-material
 
 Material control library for Angular reactive forms
+
+## Publish
+
+```console
+ng build idg-mat --prod && cd dist/idg-mat && npm pack && npm publish --registry=https://npm.pkg.github.com/ITIA-DIGITAL && cd ../../
+```
+
+## Documentation
+
 To update project run:
 
 ```console
 npm run mat:build
 ```
-
-## Documentation
 
 ### Angular 
 

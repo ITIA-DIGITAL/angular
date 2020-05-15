@@ -6,5 +6,6 @@ export enum NotificationType {
     Remote5XX,
     Success,
     Error,
+    Connection,
     Unknown
 }
