@@ -1,7 +1,7 @@
 import { delay, mergeMap, retryWhen } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 
-import { DEFAULT_BACKOFF, DEFAULT_DELAY, DEFAULT_MAX_RETRIES } from '../@connect';
+import { DEFAULT_BACKOFF, DEFAULT_DELAY, DEFAULT_MAX_RETRIES } from '../../@connect';
 
 const getErrorMessage = (maxRetries: number) => `${maxRetries} times tried to reach remote source`;
 

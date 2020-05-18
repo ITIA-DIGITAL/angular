@@ -76,7 +76,10 @@ export abstract class ConnectionCacheService<MODEL extends IData> extends StoreD
             src.pipe(
                 // retryWithBackoff(this.config.retryCount, this.config.retryDelayMs),
                 catchError(() => this.errorHandler()),
-                finalize(() => this.setWorking(false))
+                finalize(() => {
+                    this.setWorking(false);
+                    this.setProgress(0);
+                })
             );
     }
 

@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 import { ConnectionQueryParam, IConnectionServiceConfig, IData } from '../models';
+import { toResponseBody, uploadProgress } from '../../@rxjs/operators';
 import { ConnectionFetchService } from './connection.fetch.service';
+import { toFormData } from '../functions/toFormData.function';
 import { toUrl } from '../functions';
 
 /**
@@ -27,6 +29,32 @@ export abstract class ConnectionService<
 > extends ConnectionFetchService<MODEL, QUERY> {
     protected constructor(public config: IConnectionServiceConfig, public httpClient: HttpClient) {
         super(config, httpClient);
+    }
+
+    /**
+     * Saves from passed value as FormData
+     */
+    upload(value: MODEL | any, q?: QUERY): Observable<MODEL> {
+        const options = {
+            observe: 'events',
+            reportProgress: true
+        } as any;
+        const formData = toFormData<MODEL>(value);
+        const query = q || this.Query;
+        const url = !value.id
+            ? toUrl(this.config, query, query.childUrl)
+            : toUrl(this.config, query, query.childUrl || `/${value.id}`);
+
+        this.setWorking(true);
+
+        return (!value.id
+            ? this.httpClient.post<MODEL>(url, formData, options)
+            : this.httpClient.patch<MODEL>(url, formData, options)
+        ).pipe(
+            uploadProgress(progress => this.setProgress(progress)),
+            toResponseBody(),
+            this.finalizeConnection()
+        );
     }
 
     /**

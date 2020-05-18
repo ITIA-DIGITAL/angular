@@ -1,5 +1,5 @@
 export * from './functions';
+export * from './operators';
 
-export * from './retryWithBackoff';
 export * from './select$';
 export * from './store';

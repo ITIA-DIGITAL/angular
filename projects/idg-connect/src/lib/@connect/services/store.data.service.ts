@@ -10,8 +10,16 @@ import { Store } from '../../@rxjs';
  * https://levelup.gitconnected.com/master-rxjs-data-stores-in-services-c1f553e5d48b
  */
 export abstract class StoreDataService<MODEL extends IData> {
+    get Progress(): number {
+        return this.progress.getValue();
+    }
+
     get Working(): boolean {
         return this.working.getValue();
+    }
+
+    get Progress$(): Observable<number> {
+        return this.progress.asObservable();
     }
 
     get Working$(): Observable<boolean> {
@@ -49,6 +57,12 @@ export abstract class StoreDataService<MODEL extends IData> {
     get Current$(): Observable<MODEL> {
         return this.current.asObservable();
     }
+
+    /**
+     * Progress % of upload state
+     */
+    protected progress = new Store(0);
+
     /**
      * Working on something state
      */
@@ -76,6 +90,10 @@ export abstract class StoreDataService<MODEL extends IData> {
      * Note: it's not mutable
      */
     protected current = new Store(null);
+
+    setProgress(d: number): void {
+        this.progress.next(d);
+    }
 
     setWorking(d: boolean): void {
         this.working.next(d);
