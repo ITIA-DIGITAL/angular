@@ -1,10 +1,21 @@
-export type FileTypes = 'documents' | 'default' | 'custom' | 'image' | 'audio' | 'video' | 'excel' | 'word' | 'pdf';
+export type FileTypes =
+    | 'documents'
+    | 'default'
+    | 'custom'
+    | 'image'
+    | 'audio'
+    | 'video'
+    | 'excel'
+    | 'word'
+    | 'pdf'
+    | 'csv';
 
 const image = 'image/jpg image/jpeg image/png image/ico image/svg image/bpm image/webp image/gif image/bpm';
 const powerpoint = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
 const word = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 const excel = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 const pdf = 'application/pdf';
+const csv = 'text/csv';
 
 const documents = `${powerpoint} ${word} ${excel} ${pdf}`;
 const defaultDocuments = `${documents} ${image}`;
@@ -36,6 +47,11 @@ export const fileType = {
         type: excel,
         extensions: '.xlsx,.xls',
         icon: 'filter_9_plus'
+    },
+    csv: {
+        type: csv,
+        extensions: '.csv',
+        icon: 'list_alt'
     },
     powerpoint: {
         type: powerpoint,

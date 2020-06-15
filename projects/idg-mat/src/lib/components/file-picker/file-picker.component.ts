@@ -69,6 +69,7 @@ export class FilePickerComponent extends AbstractControlComponent<File[]> implem
 
         this.filesCount = this.config.filesCount;
         this.fileType = this.config.fileType;
+        this.drop.fileType = this.fileType; // <-- fix always is default
 
         this.$fileUpload.nativeElement.onchange = () => {
             const userFileList: FileList = this.$fileUpload.nativeElement.files;
