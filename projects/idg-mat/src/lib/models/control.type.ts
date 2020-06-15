@@ -11,4 +11,5 @@ export type ControlType =
     | 'divider'
     | 'select'
     | 'array'
+    | 'child'
     | 'input';

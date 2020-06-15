@@ -1,8 +1,8 @@
 import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn, FormGroup, FormArray } from '@angular/forms';
+import { isArrayLike } from 'rxjs/internal-compatibility';
 
 import { IControlConfig } from './control.config.interface';
 import { IDGFormControl } from './i-d-g-form-control';
-import { isArrayLike } from 'rxjs/internal-compatibility';
 
 export class IDGFormGroup extends FormGroup {
     readonly controlsConfig: { [key: string]: IControlConfig };
@@ -14,29 +14,42 @@ export class IDGFormGroup extends FormGroup {
     ) {
         const controls: { [key: string]: any } = {};
         for (const key of Object.keys(controlsConfig)) {
-            const cc = controlsConfig[key];
-            switch (cc.elementType) {
+            const setup = controlsConfig[key];
+            switch (setup.elementType) {
                 case 'array':
-                    if (!!cc.value && !isArrayLike(cc.value)) {
+                    if (!!setup.value && !isArrayLike(setup.value)) {
                         throw new Error('IDG: Invalid value for array type');
                     }
-                    if (!cc.children) {
+                    if (!setup.children) {
                         throw new Error('IDG: No children conf. provided');
                     }
-                    const formGroups = ((cc.value || []) as Array<any>).map(value => {
-                        const c = { ...cc.children };
-                        for (const childKey of Object.keys(cc.children)) {
-                            c[childKey].value = value[childKey];
+                    const formGroups = ((setup.value || []) as Array<any>).map(value => {
+                        const itemConfig = { ...setup.children };
+                        if (!!setup.value) {
+                            for (const childKey of Object.keys(itemConfig)) {
+                                itemConfig[childKey].value = value[childKey];
+                            }
                         }
-                        return new IDGFormGroup(c);
+                        return new IDGFormGroup(itemConfig);
                     });
                     controls[key] = new FormArray(formGroups);
                     break;
+                case 'child':
+                    if (!setup.children) {
+                        throw new Error('IDG: No children conf. provided');
+                    }
+                    const childSetup = { ...setup.children };
+                    if (!!setup.value) {
+                        for (const childKey of Object.keys(childSetup)) {
+                            childSetup[childKey].value = setup.value[childKey];
+                        }
+                    }
+                    controls[key] = new IDGFormGroup(childSetup);
+                    break;
                 default:
-                    controls[key] = new IDGFormControl(cc);
+                    controls[key] = new IDGFormControl(setup);
             }
         }
-
         super(controls, validatorOrOpts, asyncValidator);
         this.controlsConfig = { ...controlsConfig };
     }

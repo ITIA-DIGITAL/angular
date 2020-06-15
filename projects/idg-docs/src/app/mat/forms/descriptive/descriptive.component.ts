@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 
-import { IControlConfig, IControlOptions, IDGFormControl, IDGFormGroup } from 'idg-mat';
+import { IControlConfig, IControlOptions, IDGFormGroup } from 'idg-mat';
 import { FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -102,6 +102,24 @@ export class DescriptiveComponent implements OnInit {
         }
     };
 
+    addressFormConfig: { [key: string]: IControlConfig } = {
+        line1: {
+            placeholder: 'Address line 1',
+            hint: 'Address line 1',
+            elementType: 'input'
+        },
+        line2: {
+            placeholder: 'Address line 2',
+            hint: 'Address line 2',
+            elementType: 'input'
+        },
+        zipcode: {
+            placeholder: 'Zip code',
+            hint: 'Zipcode format',
+            elementType: 'input'
+        }
+    };
+
     form = new IDGFormGroup({
         username: {
             placeholder: 'Type your username',
@@ -179,11 +197,15 @@ export class DescriptiveComponent implements OnInit {
             ],
             elementType: 'array',
             children: this.contactsFormConfig
+        },
+        address: {
+            elementType: 'child',
+            children: this.addressFormConfig
         }
     });
     hide = false;
 
-    addresses = this.form.get('contacts') as FormArray;
+    contacts = this.form.get('contacts') as FormArray;
 
     ngOnInit(): void {
         this.form.valueChanges.subscribe(r => console.log(r));
@@ -194,7 +216,7 @@ export class DescriptiveComponent implements OnInit {
     }
 
     addContact(): void {
-        this.addresses.push(new IDGFormGroup(this.contactsFormConfig));
+        this.contacts.push(new IDGFormGroup(this.contactsFormConfig));
     }
 
     addCode(address: IDGFormGroup): void {

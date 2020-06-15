@@ -76,14 +76,33 @@
         </idg-mat-date-picker>
         <idg-mat-file-picker formControlName="files"> </idg-mat-file-picker>
 
-        <mat-card class="contacts">
+        <mat-card class="nested">
+            <mat-card-header>
+                <mat-card-title>Dirección</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <ng-container formGroupName="address">
+                    <idg-mat-input formControlName="line1">
+                        <mat-icon matPrefix>explore</mat-icon>
+                    </idg-mat-input>
+                    <idg-mat-input formControlName="line2">
+                        <mat-icon matPrefix>explore</mat-icon>
+                    </idg-mat-input>
+                    <idg-mat-input formControlName="zipcode">
+                        <mat-icon matPrefix>explore</mat-icon>
+                    </idg-mat-input>
+                </ng-container>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="nested">
             <mat-card-header>
                 <mat-card-title>Contacts</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <ng-container formArrayName="contacts">
                     <!--  form array arrays -->
-                    <div fxLayout="column" *ngFor="let _ of addresses.controls; index as i" [formGroupName]="i">
+                    <div fxLayout="column" *ngFor="let _ of contacts.controls; index as i" [formGroupName]="i">
                         <h3>Contacto:</h3>
                         <idg-mat-input formControlName="line1">
                             <mat-icon matPrefix>edit</mat-icon>
