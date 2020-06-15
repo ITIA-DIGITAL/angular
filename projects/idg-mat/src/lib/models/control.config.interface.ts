@@ -6,10 +6,11 @@ import { ControlType } from './control.type';
 import { FileTypes } from './file.type';
 
 export interface IControlConfig {
+    children?: { [key: string]: IControlConfig };
     // html properties
     elementType?: ControlType;
     placeholder?: string;
-    visible: boolean;
+    visible?: boolean;
     hint?: string;
     name?: string;
     value?: any;

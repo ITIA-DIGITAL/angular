@@ -14,6 +14,7 @@
                     </div>
                     <div fxFlex>
                         <idg-mat-terminal title="Result" [code]="form.value | json"></idg-mat-terminal>
+                        <button mat-button (click)="log()">LOG VALUE</button>
                     </div>
                 </div>
             </mat-tab>
@@ -73,8 +74,36 @@
         <idg-mat-date-picker formControlName="birthday">
             <mat-icon matPrefix>cake</mat-icon>
         </idg-mat-date-picker>
-        <idg-mat-file-picker formControlName="files">
-            <span>hola</span>
-        </idg-mat-file-picker>
+        <idg-mat-file-picker formControlName="files"> </idg-mat-file-picker>
+
+        <mat-card class="contacts">
+            <mat-card-header>
+                <mat-card-title>Contacts</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <ng-container formArrayName="contacts">
+                    <!--  form array arrays -->
+                    <div fxLayout="column" *ngFor="let _ of addresses.controls; index as i" [formGroupName]="i">
+                        <h3>Contacto:</h3>
+                        <idg-mat-input formControlName="line1">
+                            <mat-icon matPrefix>edit</mat-icon>
+                            <button mat-button (click)="addCode(_)">AGREGAR</button>
+                        </idg-mat-input>
+
+                        <!-- nested form array arrays -->
+                        <ng-container formArrayName="codes">
+                            <div fxLayout="row" *ngFor="let code of _.controls.codes.controls" [formGroup]="code">
+                                <idg-mat-input formControlName="code">
+                                    <mat-icon matPrefix>code</mat-icon>
+                                </idg-mat-input>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </mat-card-content>
+            <mat-card-footer>
+                <button mat-button (click)="addContact()">AGREGAR</button>
+            </mat-card-footer>
+        </mat-card>
     </form>
 </ng-template>

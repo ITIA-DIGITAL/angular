@@ -10,4 +10,5 @@ export type ControlType =
     | 'textarea'
     | 'divider'
     | 'select'
+    | 'array'
     | 'input';
