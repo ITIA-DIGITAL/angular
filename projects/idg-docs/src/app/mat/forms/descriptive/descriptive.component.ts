@@ -71,6 +71,8 @@ export class DescriptiveComponent implements OnInit {
             children: this.contactsFormConfig
         }
     });
+    ...
+    addresses = this.form.get('contacts') as FormArray;
     `;
 
     countries = [
@@ -169,6 +171,12 @@ export class DescriptiveComponent implements OnInit {
             filesCount: 2
         },
         contacts: {
+            value: [
+                {
+                    line1: 'Sample line',
+                    codes: [{ code: 'My code' }]
+                }
+            ],
             elementType: 'array',
             children: this.contactsFormConfig
         }
