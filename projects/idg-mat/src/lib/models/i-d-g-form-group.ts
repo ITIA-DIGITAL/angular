@@ -16,15 +16,15 @@ export class IDGFormGroup extends FormGroup {
         for (const key of Object.keys(controlsConfig)) {
             const setup = controlsConfig[key];
             switch (setup.elementType) {
-                case 'array':
+                case 'childArray':
                     if (!!setup.value && !isArrayLike(setup.value)) {
                         throw new Error('IDG: Invalid value for array type');
                     }
-                    if (!setup.children) {
-                        throw new Error('IDG: No children conf. provided');
+                    if (!setup.childDef) {
+                        throw new Error('IDG: No childDef conf. provided');
                     }
                     const formGroups = ((setup.value || []) as Array<any>).map(value => {
-                        const itemConfig = { ...setup.children };
+                        const itemConfig = { ...setup.childDef };
                         if (!!setup.value) {
                             for (const childKey of Object.keys(itemConfig)) {
                                 itemConfig[childKey].value = value[childKey];
@@ -35,10 +35,10 @@ export class IDGFormGroup extends FormGroup {
                     controls[key] = new FormArray(formGroups);
                     break;
                 case 'child':
-                    if (!setup.children) {
-                        throw new Error('IDG: No children conf. provided');
+                    if (!setup.childDef) {
+                        throw new Error('IDG: No childDef conf. provided');
                     }
-                    const childSetup = { ...setup.children };
+                    const childSetup = { ...setup.childDef };
                     if (!!setup.value) {
                         for (const childKey of Object.keys(childSetup)) {
                             childSetup[childKey].value = setup.value[childKey];

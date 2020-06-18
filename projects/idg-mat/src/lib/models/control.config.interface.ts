@@ -6,7 +6,8 @@ import { ControlType } from './control.type';
 import { FileTypes } from './file.type';
 
 export interface IControlConfig {
-    children?: { [key: string]: IControlConfig };
+    // Nested form definition (for array and children types)
+    childDef?: { [key: string]: IControlConfig };
     // html properties
     elementType?: ControlType;
     placeholder?: string;

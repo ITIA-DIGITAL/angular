@@ -3,6 +3,7 @@ export type ControlType =
     | 'autocompletes'
     | 'autocomplete'
     | 'email-input'
+    | 'childArray'
     | 'date-input'
     | 'file-input'
     | 'url-input'
@@ -10,6 +11,5 @@ export type ControlType =
     | 'textarea'
     | 'divider'
     | 'select'
-    | 'array'
     | 'child'
     | 'input';

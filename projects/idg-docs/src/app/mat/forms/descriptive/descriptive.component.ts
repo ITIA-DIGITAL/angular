@@ -67,8 +67,12 @@ export class DescriptiveComponent implements OnInit {
         },
         ....
         contacts: {
-            elementType: 'array',
+            elementType: 'childArray',
             children: this.contactsFormConfig
+        },
+        address: {
+            elementType: 'child',
+            childDef: this.addressFormConfig
         }
     });
     ...
@@ -97,8 +101,8 @@ export class DescriptiveComponent implements OnInit {
             elementType: 'input'
         },
         codes: {
-            elementType: 'array',
-            children: this.codesFormConfig
+            elementType: 'childArray',
+            childDef: this.codesFormConfig
         }
     };
 
@@ -195,12 +199,12 @@ export class DescriptiveComponent implements OnInit {
                     codes: [{ code: 'My code' }]
                 }
             ],
-            elementType: 'array',
-            children: this.contactsFormConfig
+            elementType: 'childArray',
+            childDef: this.contactsFormConfig
         },
         address: {
             elementType: 'child',
-            children: this.addressFormConfig
+            childDef: this.addressFormConfig
         }
     });
     hide = false;
