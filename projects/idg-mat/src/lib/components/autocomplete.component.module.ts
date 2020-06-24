@@ -1,4 +1,14 @@
-import { ViewEncapsulation, forwardRef, Component, NgModule, Optional, SkipSelf, Host } from '@angular/core';
+import {
+    ViewEncapsulation,
+    ElementRef,
+    forwardRef,
+    ViewChild,
+    Component,
+    NgModule,
+    Optional,
+    SkipSelf,
+    Host,
+} from '@angular/core';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +18,7 @@ import { IDGMatModule } from '../idg-mat.module';
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => AutocompleteComponent),
-    multi: true
+    multi: true,
 };
 
 @Component({
@@ -63,10 +73,10 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
             mat-form-field {
                 width: 100%;
             }
-        `
+        `,
     ],
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class AutocompleteComponent extends AutocompleteControlComponent<string> {
     constructor(
@@ -79,6 +89,7 @@ export class AutocompleteComponent extends AutocompleteControlComponent<string> 
     }
 
     onClear(): void {
+        this.filter.nativeElement.value = '';
         this.onSelected({ text: '', value: null, checked: false });
     }
 }
@@ -86,6 +97,6 @@ export class AutocompleteComponent extends AutocompleteControlComponent<string> 
 @NgModule({
     imports: [CommonModule, IDGMatModule],
     declarations: [AutocompleteComponent],
-    exports: [AutocompleteComponent]
+    exports: [AutocompleteComponent],
 })
 export class AutocompleteModule {}

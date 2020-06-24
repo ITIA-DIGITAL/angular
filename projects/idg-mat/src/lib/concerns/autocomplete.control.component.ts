@@ -52,7 +52,7 @@ export abstract class AutocompleteControlComponent<T> extends SelectControlCompo
 
         // Load text value if observable passed
         if (isObservable(this.config.valueText)) {
-            this.valueTextSubscription = (this.config.valueText as Observable<string>).subscribe(r =>
+            this.valueTextSubscription = (this.config.valueText as Observable<string>).subscribe((r) =>
                 console.log((this.valueText = r))
             );
         } else {
