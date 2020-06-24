@@ -9,7 +9,7 @@ import { ConnectionFetchService } from '../services';
 import { AbstractListComponent } from './abstract.list.component';
 
 /**
- * Base control for listing records with MatTable
+ * Base formControl for listing records with MatTable
  */
 export abstract class AbstractTableComponent<MODEL extends IData, QUERY extends ConnectionQueryParam>
     extends AbstractListComponent<MODEL, QUERY>

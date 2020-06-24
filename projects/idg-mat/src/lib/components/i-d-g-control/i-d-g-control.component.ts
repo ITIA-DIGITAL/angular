@@ -4,9 +4,9 @@ import { ViewEncapsulation, forwardRef, Component, Optional, SkipSelf, Host } fr
 import { AbstractControlComponent } from '../../concerns';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => IDGControlComponent),
-    multi: true
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
 };
 
 @Component({
@@ -14,7 +14,7 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     templateUrl: './i-d-g-control.component.html',
     styleUrls: ['./i-d-g-control.component.scss'],
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class IDGControlComponent extends AbstractControlComponent<string | string[] | boolean | File[]> {
     constructor(
@@ -27,7 +27,7 @@ export class IDGControlComponent extends AbstractControlComponent<string | strin
     }
 
     /**
-     * ValueChanges proxy to handles each fileType of control
+     * ValueChanges proxy to handles each fileType of formControl
      */
     onControlChanges(obj: any): void {
         if (this.value !== obj) {

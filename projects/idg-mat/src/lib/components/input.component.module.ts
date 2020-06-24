@@ -7,9 +7,9 @@ import { IDGMatModule } from '../idg-mat.module';
 import { AbstractControlComponent } from '../concerns';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputComponent),
-    multi: true
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
 };
 
 @Component({
@@ -31,7 +31,7 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
                     />
                     <ng-content select="mat-hint"></ng-content>
                     <ng-content select="mat-error"></ng-content>
-                    <mat-error *ngIf="control?.errors?.match">Invalid email. </mat-error>
+                    <mat-error *ngIf="formControl?.errors?.match">Invalid email.</mat-error>
                 </div>
 
                 <ng-content select="[matSuffix]"></ng-content>
@@ -49,9 +49,9 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
             mat-form-field {
                 width: 100%;
             }
-        `
+        `,
     ],
-    providers: [IDG_MAT_FORM_VALUE_ACCESSOR]
+    providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
 })
 export class InputComponent extends AbstractControlComponent<string> {
     constructor(
@@ -67,6 +67,6 @@ export class InputComponent extends AbstractControlComponent<string> {
 @NgModule({
     imports: [CommonModule, FlexLayoutModule, IDGMatModule],
     declarations: [InputComponent],
-    exports: [InputComponent]
+    exports: [InputComponent],
 })
 export class InputModule {}

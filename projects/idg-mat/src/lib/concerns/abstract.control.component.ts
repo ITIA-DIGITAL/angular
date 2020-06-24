@@ -1,15 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    Host,
-    Injectable,
-    Input,
-    OnDestroy,
-    OnInit,
-    Optional,
-    Output,
-    SkipSelf
-} from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit, Optional, SkipSelf, Output, Input, Host } from '@angular/core';
 import { ControlContainer, ControlValueAccessor } from '@angular/forms';
 
 import { IControlComponent, IControlConfig, IDGFormControl } from '../models';
@@ -23,11 +12,10 @@ export abstract class AbstractControlComponent<T>
         public controlContainer: ControlContainer
     ) {}
 
+    @Input() formControl: IDGFormControl;
     @Input() formControlName: string;
     @Input() config: IControlConfig;
     @Input() name: string;
-
-    control: IDGFormControl;
 
     // UI, props
     placeholder: string;
@@ -44,7 +32,9 @@ export abstract class AbstractControlComponent<T>
 
     ngOnInit(): void {
         if (!this.config) {
-            if (this.controlContainer) {
+            if (!!this.formControl) {
+                this.config = this.formControl.config;
+            } else if (this.controlContainer) {
                 if (this.formControlName) {
                     const c: any = this.controlContainer.control.get(this.formControlName);
 
@@ -56,15 +46,16 @@ export abstract class AbstractControlComponent<T>
                         throw new Error('IDG: FormControl is not IDGFormControl');
                     }
 
-                    this.control = c as IDGFormControl;
-                    this.config = this.control.config;
+                    this.formControl = c as IDGFormControl;
+                    this.config = this.formControl.config;
                 } else {
                     throw new Error('IDG: Missing [FormControlName] directive from host element of the component');
                 }
             } else {
                 throw new Error(
-                    `IDG: No config (IControlConfig) provided, check ${this.formControlName ||
-                        this.name} control is inside a [formGroup] container or [config] param is provided`
+                    `IDG: No config (IControlConfig) provided, check ${
+                        this.formControlName || this.name
+                    } control is inside a [formGroup] container,  [formControl] or [config] param is provided`
                 );
             }
         }

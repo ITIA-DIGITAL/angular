@@ -6,9 +6,9 @@ import { AbstractControlComponent } from '../concerns';
 import { IDGMatModule } from '../idg-mat.module';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => DatePickerComponent),
-    multi: true
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
 };
 
 @Component({
@@ -32,7 +32,7 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
                     />
                     <ng-content select="mat-hint"></ng-content>
                     <ng-content select="mat-error"></ng-content>
-                    <mat-error *ngIf="control?.errors?.match">Invalid email. </mat-error>
+                    <mat-error *ngIf="formControl?.errors?.match">Invalid email.</mat-error>
                 </div>
                 <mat-datepicker #picker></mat-datepicker>
                 <button matSuffix class="mb-8" mat-icon-button aria-label="open datepicker" (click)="picker.open()">
@@ -55,9 +55,9 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
             mat-form-field {
                 width: 100%;
             }
-        `
+        `,
     ],
-    providers: [IDG_MAT_FORM_VALUE_ACCESSOR]
+    providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
 })
 export class DatePickerComponent extends AbstractControlComponent<string> {
     constructor(
@@ -73,6 +73,6 @@ export class DatePickerComponent extends AbstractControlComponent<string> {
 @NgModule({
     imports: [CommonModule, IDGMatModule],
     declarations: [DatePickerComponent],
-    exports: [DatePickerComponent]
+    exports: [DatePickerComponent],
 })
 export class DatePickerModule {}

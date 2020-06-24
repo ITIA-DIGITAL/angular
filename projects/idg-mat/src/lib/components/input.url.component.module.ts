@@ -7,14 +7,14 @@ import { urlRegEx as regex } from '../models/regex';
 import { IDGMatModule } from '../idg-mat.module';
 
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputUrlComponent),
-    multi: true
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
 };
 const IDG_MAT_NG_VALIDATORS = {
-    provide: NG_VALIDATORS,
     useExisting: forwardRef(() => InputUrlComponent),
-    multi: true
+    provide: NG_VALIDATORS,
+    multi: true,
 };
 
 @Component({
@@ -36,7 +36,7 @@ const IDG_MAT_NG_VALIDATORS = {
                     />
                     <ng-content select="mat-hint"></ng-content>
                     <ng-content select="mat-error"></ng-content>
-                    <mat-error *ngIf="control?.errors?.match">Invalid</mat-error>
+                    <mat-error *ngIf="formControl?.errors?.match">Invalid</mat-error>
                 </div>
 
                 <ng-content select="[matSuffix]"></ng-content>
@@ -54,9 +54,9 @@ const IDG_MAT_NG_VALIDATORS = {
             mat-form-field {
                 width: 100%;
             }
-        `
+        `,
     ],
-    providers: [IDG_MAT_FORM_VALUE_ACCESSOR, IDG_MAT_NG_VALIDATORS]
+    providers: [IDG_MAT_FORM_VALUE_ACCESSOR, IDG_MAT_NG_VALIDATORS],
 })
 export class InputUrlComponent extends AbstractControlComponent<string> implements Validator {
     constructor(
@@ -74,7 +74,7 @@ export class InputUrlComponent extends AbstractControlComponent<string> implemen
         return regex.test(c.value)
             ? null
             : {
-                  match: true
+                  match: true,
               };
     }
 }
@@ -82,6 +82,6 @@ export class InputUrlComponent extends AbstractControlComponent<string> implemen
 @NgModule({
     imports: [CommonModule, IDGMatModule],
     declarations: [InputUrlComponent],
-    exports: [InputUrlComponent]
+    exports: [InputUrlComponent],
 })
 export class InputUrlModule {}
