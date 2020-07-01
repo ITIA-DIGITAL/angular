@@ -1,5 +1,5 @@
 import { tap } from 'rxjs/operators';
-import { of, iif, Observable, Subscription } from 'rxjs';
+import { of, iif, Observable, Subscription, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { ConnectionCacheService } from './connection.cache.service';
@@ -49,7 +49,7 @@ export abstract class ConnectionFetchService<
         const req = this.httpClient.get<any>(url);
         this.setWorking(true);
 
-        return this.fetch(url, req, false).pipe(tap(o => this.setFilter(o)));
+        return this.fetch(url, req, false).pipe(tap((o) => this.setFilter(o)));
     }
 
     /***
@@ -148,6 +148,13 @@ export abstract class ConnectionFetchService<
                 }
             })
         );
+    }
+
+    refresh(): Observable<{ count: number; list: MODEL[] }> {
+        return forkJoin({
+            count: this.getCount(null, true),
+            list: this.getList(null, true),
+        });
     }
 
     /**
