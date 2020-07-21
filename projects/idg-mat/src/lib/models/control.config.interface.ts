@@ -27,8 +27,9 @@ export interface IControlConfig {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
     validators?: ValidatorFn[];
     // File input params
-    filesCount?: number;
+    fileDetailsHidden?: boolean;
     fileType?: FileTypes;
+    filesCount?: number;
     // Flex layout
     fxFlexXs?: string;
     fxFlex?: string;

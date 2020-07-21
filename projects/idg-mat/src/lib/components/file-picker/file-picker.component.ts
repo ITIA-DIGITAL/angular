@@ -7,7 +7,7 @@ import {
     SkipSelf,
     Host,
     ViewChild,
-    OnInit
+    OnInit,
 } from '@angular/core';
 import { Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, ControlContainer } from '@angular/forms';
 
@@ -18,13 +18,13 @@ import { fileType, FileTypes } from '../../models';
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FilePickerComponent),
-    multi: true
+    multi: true,
 };
 
 const IDG_MAT_NG_VALIDATORS = {
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => FilePickerComponent),
-    multi: true
+    multi: true,
 };
 
 /**
@@ -37,16 +37,17 @@ const IDG_MAT_NG_VALIDATORS = {
     templateUrl: './file-picker.component.html',
     styleUrls: ['./file-picker.component.scss'],
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR, IDG_MAT_NG_VALIDATORS],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class FilePickerComponent extends AbstractControlComponent<File[]> implements Validator, OnInit {
+    @ViewChild('fileUpload', { static: true }) $fileUpload: ElementRef<HTMLInputElement>;
+
+    fileDetailsHidden = false;
+    fileTypeConfig = fileType;
+    fileItems: File[] = [];
     fileType: FileTypes;
     filesCount = 1;
 
-    @ViewChild('fileUpload', { static: true }) $fileUpload: ElementRef<HTMLInputElement>;
-
-    fileItems: File[] = [];
-    fileTypeConfig = fileType;
     isOverDragAndDrop = false;
     iconFileType: string;
 
@@ -67,6 +68,7 @@ export class FilePickerComponent extends AbstractControlComponent<File[]> implem
             ? this.fileTypeConfig[this.fileType].icon
             : this.fileTypeConfig.default.icon;
 
+        this.fileDetailsHidden = this.config.fileDetailsHidden;
         this.filesCount = this.config.filesCount;
         this.fileType = this.config.fileType;
         this.drop.fileType = this.fileType; // <-- fix always is default
@@ -77,8 +79,8 @@ export class FilePickerComponent extends AbstractControlComponent<File[]> implem
             this.fileItems = [
                 ...this.fileItems,
                 ...Object.getOwnPropertyNames(userFileList)
-                    .map(prop => userFileList[prop] as File)
-                    .filter(fileTmp => this.drop.fileIsValid(fileTmp))
+                    .map((prop) => userFileList[prop] as File)
+                    .filter((fileTmp) => this.drop.fileIsValid(fileTmp)),
             ];
             this.change(this.fileItems);
         };
@@ -94,7 +96,7 @@ export class FilePickerComponent extends AbstractControlComponent<File[]> implem
     }
 
     removeFile(itemToRemove: File) {
-        this.fileItems = this.fileItems.filter(item => item !== itemToRemove);
+        this.fileItems = this.fileItems.filter((item) => item !== itemToRemove);
         this.change(this.fileItems);
     }
 
@@ -103,8 +105,8 @@ export class FilePickerComponent extends AbstractControlComponent<File[]> implem
         return isNotValid
             ? {
                   filesCount: {
-                      valid: false
-                  }
+                      valid: false,
+                  },
               }
             : null;
     }
