@@ -1,6 +1,6 @@
 import { tap } from 'rxjs/operators';
 import { of, iif, Observable, Subscription, forkJoin } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ConnectionCacheService } from './connection.cache.service';
 import { IConnectionServiceConfig, IData, ConnectionQueryParam } from '../models';
@@ -14,6 +14,7 @@ export abstract class ConnectionFetchService<
     MODEL extends IData,
     QUERY extends ConnectionQueryParam
 > extends ConnectionCacheService<MODEL> {
+    protected httpRequestOptions: { headers?: HttpHeaders };
     private querySubscription: Subscription;
 
     get Query(): QUERY {
@@ -45,7 +46,8 @@ export abstract class ConnectionFetchService<
      * @param query, params to filter the filters, uses current service :Query by default
      */
     getFilter(query?: QUERY): Observable<any> {
-        const url = toUrl(this.config, query || this.Query, '/filters');
+        query = query || this.Query;
+        const url = toUrl(this.config, query, query.childUrl || '/filters');
         const req = this.httpClient.get<any>(url);
         this.setWorking(true);
 
@@ -88,7 +90,6 @@ export abstract class ConnectionFetchService<
      * and emmit the Count$ and List$.
      * You may set to false at some moment after enabled
      * @param enabled, enable/disabled boolean
-     * @constructor
      */
     subscribeToQuery(enabled: boolean): Subscription {
         if (enabled) {
@@ -114,8 +115,9 @@ export abstract class ConnectionFetchService<
      * @param changeState, variable to indicate if Store changes state
      */
     getList(query?: QUERY, changeState: boolean = true): Observable<MODEL[]> {
-        const url = toUrl(this.config, query || this.Query);
-        const req = this.httpClient.get<MODEL[]>(url);
+        query = query || this.Query;
+        const url = toUrl(this.config, query, query.childUrl || '');
+        const req = this.httpClient.get<MODEL[]>(url, this.httpRequestOptions);
         this.setWorking(true);
 
         return this.fetch(url, req, (query || this.Query).useCache).pipe(
@@ -137,8 +139,9 @@ export abstract class ConnectionFetchService<
      * @param changeState, variable to indicate if Store changes state
      */
     getCount(query?: QUERY, changeState: boolean = true): Observable<number> {
-        const url = toUrl(this.config, query || this.Query, '/count');
-        const req = this.httpClient.get<number>(url);
+        query = query || this.Query;
+        const url = toUrl(this.config, query, query.childUrl || '/count');
+        const req = this.httpClient.get<number>(url, this.httpRequestOptions);
         this.setWorking(true);
 
         return this.fetch(url, req, (query || this.Query).useCache).pipe(
@@ -166,8 +169,9 @@ export abstract class ConnectionFetchService<
         query?: QUERY,
         changeState: boolean = true
     ): Observable<MODEL> {
-        const url = toUrl(this.config, query || this.Query, `/${id}`);
-        const req = this.httpClient.get<MODEL>(url);
+        query = query || this.Query;
+        const url = toUrl(this.config, query, query.childUrl || `/${id}`);
+        const req = this.httpClient.get<MODEL>(url, this.httpRequestOptions);
         this.setWorking(true);
 
         return iif(

@@ -5,6 +5,7 @@ export class ConnectionQueryParam {
     readonly baseUrl: string;
     pageIndex: number | string;
     pageSize: number | string;
+    queryDisabled = false;
     accumulate: boolean;
     childUrl: string;
     orderBy: object;
@@ -15,7 +16,8 @@ export class ConnectionQueryParam {
     useCache = true;
 
     constructor(o: ConnectionQueryParam | any) {
-        this.format = o.format || Format.json;
+        this.queryDisabled = o.queryDisabled || false;
+        this.format = o.format || Format.default;
         this.pageIndex = o.pageIndex || 0;
         this.pageSize = o.pageSize || 10;
         this.orderBy = o.orderBy || null;

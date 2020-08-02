@@ -31,7 +31,7 @@ export function toUrl(config: IConnectionServiceConfig, q: ConnectionQueryParam,
         }
     }
 
-    return url + (q ? toQueryParams(q, config.dateFormat) : '');
+    return url + (q && !q.queryDisabled ? toQueryParams(q, config.dateFormat) : '');
 }
 
 export function isReservedForUrl(o: string) {
