@@ -37,7 +37,7 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
                         [value]="valueText"
                         [placeholder]="placeholder"
                         [matAutocomplete]="autocomplete"
-                        (focusout)="$event.target.value = valueText"
+                        (focusout)="onFocusOut($event)"
                     />
                     <ng-content select="mat-hint"></ng-content>
                     <ng-content select="mat-error"></ng-content>
@@ -86,6 +86,14 @@ export class AutocompleteComponent extends AutocompleteControlComponent<string> 
         public controlContainer: ControlContainer
     ) {
         super(controlContainer);
+    }
+
+    onFocusOut($event: any): void {
+        if (this.config.findOrCreate) {
+            this.onSelected({ text: $event.target.value, value: $event.target.value, checked: true });
+        } else {
+            $event.target.value = this.valueText;
+        }
     }
 
     onClear(): void {

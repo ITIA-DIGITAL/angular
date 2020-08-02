@@ -24,13 +24,13 @@ export abstract class SelectControlComponent<T> extends AbstractControlComponent
         this.opts = [...value];
 
         if (!!this.config && !this.config.forceSelection) {
-            this.opts = [{ value: null, text: '---' }, ...value];
+            this.opts = [{ value: null, text: '...' }, ...value];
         }
 
         if (Array.isArray(this.value)) {
             const selection: any[] = this.value;
             for (const option of this.options) {
-                option.checked = !!selection.find(v => v === option.value);
+                option.checked = !!selection.find((v) => v === option.value);
             }
         }
     }
@@ -53,7 +53,7 @@ export abstract class SelectControlComponent<T> extends AbstractControlComponent
         }
 
         if (!!this.config.asyncOptions) {
-            this.optionsSubscription = this.config.asyncOptions.subscribe(r => (this.options = r));
+            this.optionsSubscription = this.config.asyncOptions.subscribe((r) => (this.options = r));
         }
     }
 

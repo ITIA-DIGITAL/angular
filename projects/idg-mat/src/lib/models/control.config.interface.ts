@@ -23,6 +23,7 @@ export interface IControlConfig {
     valueText?: Observable<string> | string;
     queryChange?: (q: string) => void;
     forceSelection?: boolean;
+    findOrCreate?: boolean;
     // reactive form attributes
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
     validators?: ValidatorFn[];
