@@ -56,7 +56,7 @@ export abstract class AutocompleteControlComponent<T> extends SelectControlCompo
                 console.log((this.valueText = r))
             );
         } else {
-            this.valueText = this.config.valueText || '';
+            this.valueText = this.config.valueText || this.config.value || '';
         }
 
         // Setup input search
