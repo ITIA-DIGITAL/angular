@@ -99,6 +99,9 @@ export abstract class AbstractControlComponent<T>
 
     writeValue(obj: any): void {
         this.value = obj;
-        this.config.value = obj;
+
+        if (this.config) {
+            this.config.value = obj;
+        }
     }
 }
