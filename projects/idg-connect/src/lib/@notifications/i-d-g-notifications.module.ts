@@ -3,6 +3,6 @@ import { NgModule } from '@angular/core';
 import { IDGNotificationsService } from './services';
 
 @NgModule({
-    providers: [IDGNotificationsService]
+    providers: [IDGNotificationsService],
 })
 export class IDGNotificationsModule {}

@@ -2,7 +2,10 @@
     <form [formGroup]="form" fxLayout="row wrap">
         <ng-container *ngFor="let name of controlNames">
             <idg-mat-control
-                *ngIf="form.controlsConfig[name].visible !== false"
+                *ngIf="
+                    form.controlsConfig[name].visible !== false &&
+                    form.controlsConfig[name].elementType !== 'childArray'
+                "
                 [fxFlex.xs]="form.controlsConfig[name].fxFlexXs || '100%'"
                 [fxFlex]="form.controlsConfig[name].fxFlex || '100%'"
                 [config]="form.controlsConfig[name]"

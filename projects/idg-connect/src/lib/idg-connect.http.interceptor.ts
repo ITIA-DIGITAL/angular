@@ -1,10 +1,10 @@
 import {
     HTTP_INTERCEPTORS,
     HttpErrorResponse,
-    HttpEvent,
     HttpHandler,
+    HttpRequest,
+    HttpEvent,
     HttpInterceptor,
-    HttpRequest
 } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 
@@ -36,7 +36,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                         durationMs: 3000,
                         raw: error.error,
                         code: 'LOCAL',
-                        id: null
+                        id: null,
                     });
                     errorMessage = `Error: ${error.error.error}`;
                 } else {
@@ -49,7 +49,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                             id: null,
                             message: 'COULD_NOT_CONNECT',
                             type: NotificationType.Connection,
-                            icon: NotificationIcon.Cloud
+                            icon: NotificationIcon.Cloud,
                         });
                     } else {
                         const type: NotificationType =
@@ -91,7 +91,7 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
                             id: null,
                             message,
                             type,
-                            icon
+                            icon,
                         });
                     }
 
@@ -109,8 +109,8 @@ export class IDGConnectHttpInterceptor implements HttpInterceptor {
         {
             useClass: IDGConnectHttpInterceptor,
             provide: HTTP_INTERCEPTORS,
-            multi: true
-        }
-    ]
+            multi: true,
+        },
+    ],
 })
 export class IDGConnectHttpInterceptorModule {}

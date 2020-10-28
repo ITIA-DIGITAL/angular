@@ -17,7 +17,7 @@ export class IDGNotificationsService extends StoreService<Notification[]> {
     private success$: Observable<Notification[]>;
     private errors$: Observable<Notification[]>;
 
-    private select$ = (type: NotificationType) => select$(this.State$, n => n.filter(item => item.type === type));
+    private select$ = (type: NotificationType) => select$(this.State$, (n) => n.filter((item) => item.type === type));
 
     get Remote2XX$(): Observable<Notification[]> {
         if (!this.remote2XX$) {
@@ -76,12 +76,12 @@ export class IDGNotificationsService extends StoreService<Notification[]> {
         this.set([n, ...this.State]);
 
         this.snack.open(n.message, 'OK', {
-            duration: 4000
+            duration: 4000,
         });
     }
 
     remove(n: Notification) {
-        this.set(this.State.filter(s => s !== n));
+        this.set(this.State.filter((s) => s !== n));
     }
 
     clear() {
