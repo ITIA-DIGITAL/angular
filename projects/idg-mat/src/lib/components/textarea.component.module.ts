@@ -8,7 +8,7 @@ import { IDGMatModule } from '../idg-mat.module';
 export const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => TextareaComponent),
-    multi: true
+    multi: true,
 };
 
 /**
@@ -17,28 +17,32 @@ export const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
 @Component({
     selector: 'idg-mat-textarea',
     template: `
-        <mat-form-field appearance="outline" floatLabel="always">
-            <mat-label>{{ hint }}</mat-label>
+        <mat-form-field [ngClass]="{ 'mat-form-field-invalid': formControl?.invalid }">
+            <mat-label class="hint">{{ hint }}</mat-label>
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <ng-content select="[matPrefix]"></ng-content>
 
-                <div fxFlex fxLayout="column">
-                    <textarea
-                        (input)="change($event.target['value'])"
-                        [placeholder]="placeholder"
-                        [disabled]="disabled"
-                        [value]="value"
-                        rows="2"
-                        matInput
-                    ></textarea>
-                    <ng-content select="mat-hint"></ng-content>
-                    <ng-content select="mat-error"></ng-content>
-                </div>
+                <textarea
+                    (input)="change($event.target['value'])"
+                    [placeholder]="placeholder"
+                    [disabled]="disabled"
+                    [value]="value"
+                    rows="2"
+                    matInput
+                ></textarea>
 
                 <ng-content select="[matSuffix]"></ng-content>
                 <ng-content select="button"></ng-content>
                 <ng-content select="a"></ng-content>
             </div>
+            <ng-content select="mat-hint"></ng-content>
+            <ng-content select="mat-error"></ng-content>
+            <ng-container *ngIf="formControl?.invalid">
+                <mat-error *ngIf="formControl?.errors?.required; else defaultError">Requerido</mat-error>
+                <ng-template #defaultError>
+                    <mat-error>Ingrese texto</mat-error>
+                </ng-template>
+            </ng-container>
         </mat-form-field>
     `,
     styles: [
@@ -51,9 +55,13 @@ export const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
             mat-form-field {
                 width: 100%;
             }
-        `
+
+            mat-label.hint {
+                padding-left: 4px;
+            }
+        `,
     ],
-    providers: [IDG_MAT_FORM_VALUE_ACCESSOR]
+    providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
 })
 export class TextareaComponent extends AbstractControlComponent<string> {
     constructor(
@@ -69,6 +77,6 @@ export class TextareaComponent extends AbstractControlComponent<string> {
 @NgModule({
     imports: [CommonModule, IDGMatModule],
     declarations: [TextareaComponent],
-    exports: [TextareaComponent]
+    exports: [TextareaComponent],
 })
 export class TextareaModule {}

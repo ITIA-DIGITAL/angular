@@ -7,7 +7,7 @@ import { FormArray, Validators } from '@angular/forms';
 @Component({
     selector: 'idg-docs-descriptive-form',
     templateUrl: './descriptive.component.html',
-    styleUrls: ['./descriptive.component.scss']
+    styleUrls: ['./descriptive.component.scss'],
 })
 export class DescriptiveComponent implements OnInit {
     constructor() {}
@@ -82,7 +82,7 @@ export class DescriptiveComponent implements OnInit {
     countries = [
         { text: 'México', value: 'MEX' },
         { text: 'USA', value: 'USA' },
-        { text: 'Cánada', value: 'CAN' }
+        { text: 'Cánada', value: 'CAN' },
     ];
     countries$ = new BehaviorSubject<IControlOptions[]>(this.countries);
 
@@ -90,58 +90,59 @@ export class DescriptiveComponent implements OnInit {
         code: {
             placeholder: 'Input address code',
             hint: 'Address code',
-            elementType: 'input'
-        }
+            elementType: 'input',
+        },
     };
 
     contactsFormConfig: { [key: string]: IControlConfig } = {
         line1: {
             placeholder: 'Address line 1',
             hint: 'Address line 1',
-            elementType: 'input'
+            elementType: 'input',
         },
         codes: {
             elementType: 'childArray',
-            childDef: this.codesFormConfig
-        }
+            childDef: this.codesFormConfig,
+        },
     };
 
     addressFormConfig: { [key: string]: IControlConfig } = {
         line1: {
             placeholder: 'Address line 1',
             hint: 'Address line 1',
-            elementType: 'input'
+            elementType: 'input',
         },
         line2: {
             placeholder: 'Address line 2',
             hint: 'Address line 2',
-            elementType: 'input'
+            elementType: 'input',
         },
         zipcode: {
             placeholder: 'Zip code',
             hint: 'Zipcode format',
-            elementType: 'input'
-        }
+            elementType: 'input',
+        },
     };
 
     form = new IDGFormGroup({
         username: {
             placeholder: 'Type your username',
             hint: 'Input component sample',
-            elementType: 'input'
+            validators: [Validators.required],
+            elementType: 'input',
         },
         email: {
             placeholder: 'Type your email address',
             displayFn: () => 'Eg. manolo@itia.mx',
             validators: [Validators.required],
             hint: 'Email component sample',
-            elementType: 'email-input'
+            elementType: 'email-input',
         },
         website: {
             placeholder: 'Type your work or personal website',
             validators: [Validators.required],
             hint: 'Url component sample',
-            elementType: 'url-input'
+            elementType: 'url-input',
         },
         gender: {
             placeholder: 'Select your gender',
@@ -150,8 +151,8 @@ export class DescriptiveComponent implements OnInit {
             elementType: 'select',
             options: [
                 { text: 'Male', value: 1 },
-                { text: 'Female', value: 2 }
-            ]
+                { text: 'Female', value: 2 },
+            ],
         },
         country: {
             hint: 'Autocomplete component sample',
@@ -161,7 +162,7 @@ export class DescriptiveComponent implements OnInit {
             elementType: 'autocomplete',
             asyncOptions: this.countries$.asObservable(),
             queryChange: (q: string) =>
-                this.countries$.next(this.countries.filter(c => c.text.toLowerCase().match(q.toLowerCase())))
+                this.countries$.next(this.countries.filter((c) => c.text.toLowerCase().match(q.toLowerCase()))),
         },
         countries: {
             hint: 'Autocompletes component sample',
@@ -173,46 +174,47 @@ export class DescriptiveComponent implements OnInit {
             value: [],
             asyncOptions: this.countries$.asObservable(),
             queryChange: (q: string) =>
-                this.countries$.next(this.countries.filter(c => c.text.toLowerCase().match(q.toLowerCase())))
+                this.countries$.next(this.countries.filter((c) => c.text.toLowerCase().match(q.toLowerCase()))),
         },
         about: {
             placeholder: 'Tell us about you',
             validators: [Validators.required],
             hint: 'Textarea component sample',
-            elementType: 'textarea'
+            elementType: 'textarea',
         },
         birthday: {
             placeholder: 'Type your happy birthday',
             hint: 'Datepicker component sample',
-            elementType: 'date-input'
+            validators: [Validators.required, Validators.maxLength(2)],
+            elementType: 'date-input',
         },
         files: {
             hint: 'File upload component sample',
             elementType: 'file-input',
             fileType: 'documents',
-            filesCount: 2
+            filesCount: 2,
         },
         contacts: {
             value: [
                 {
                     line1: 'Sample line',
-                    codes: [{ code: 'My code' }]
-                }
+                    codes: [{ code: 'My code' }],
+                },
             ],
             elementType: 'childArray',
-            childDef: this.contactsFormConfig
+            childDef: this.contactsFormConfig,
         },
         address: {
             elementType: 'child',
-            childDef: this.addressFormConfig
-        }
+            childDef: this.addressFormConfig,
+        },
     });
     hide = false;
 
     contacts = this.form.get('contacts') as FormArray;
 
     ngOnInit(): void {
-        this.form.valueChanges.subscribe(r => console.log(r));
+        this.form.valueChanges.subscribe((r) => console.log(r));
     }
 
     log(): void {

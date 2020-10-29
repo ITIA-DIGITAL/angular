@@ -1,14 +1,4 @@
-import {
-    ViewEncapsulation,
-    ElementRef,
-    forwardRef,
-    ViewChild,
-    Component,
-    NgModule,
-    Optional,
-    SkipSelf,
-    Host,
-} from '@angular/core';
+import { ViewEncapsulation, forwardRef, Component, Host, NgModule, Optional, SkipSelf } from '@angular/core';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -24,8 +14,8 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
 @Component({
     selector: 'idg-mat-autocomplete',
     template: `
-        <mat-form-field appearance="outline" floatLabel="always">
-            <mat-label>{{ hint }}</mat-label>
+        <mat-form-field [ngClass]="{ 'mat-form-field-invalid': formControl?.invalid }">
+            <mat-label class="hint">{{ hint }}</mat-label>
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <ng-content select="[matPrefix]"></ng-content>
                 <div fxFlex fxLayout="column">
@@ -39,8 +29,6 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
                         [matAutocomplete]="autocomplete"
                         (focusout)="onFocusOut($event)"
                     />
-                    <ng-content select="mat-hint"></ng-content>
-                    <ng-content select="mat-error"></ng-content>
                 </div>
 
                 <ng-content select="[matSuffix]"></ng-content>
@@ -51,6 +39,14 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
                     <mat-icon>clear</mat-icon>
                 </button>
             </div>
+            <ng-content select="mat-hint"></ng-content>
+            <ng-content select="mat-error"></ng-content>
+            <ng-container *ngIf="formControl?.invalid">
+                <mat-error *ngIf="formControl?.errors?.required; else defaultError">Requerido</mat-error>
+                <ng-template #defaultError>
+                    <mat-error>Seleccione una opción</mat-error>
+                </ng-template>
+            </ng-container>
         </mat-form-field>
 
         <mat-autocomplete
@@ -72,6 +68,10 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
 
             mat-form-field {
                 width: 100%;
+            }
+
+            mat-label.hint {
+                padding-left: 4px;
             }
         `,
     ],

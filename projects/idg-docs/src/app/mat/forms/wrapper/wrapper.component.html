@@ -13,7 +13,10 @@
                         <ng-container *ngTemplateOutlet="descriptiveForm"></ng-container>
                     </div>
                     <div fxFlex>
-                        <idg-mat-terminal title="Result" [code]="form.value | json"></idg-mat-terminal>
+                        <idg-mat-terminal
+                            [title]="'Result (valid: ' + form.valid + ')'"
+                            [code]="form.value | json"
+                        ></idg-mat-terminal>
                     </div>
                 </div>
             </mat-tab>

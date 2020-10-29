@@ -1,18 +1,18 @@
 import {
     ViewEncapsulation,
     forwardRef,
-    OnDestroy,
-    OnInit,
     Component,
     NgModule,
     Optional,
     SkipSelf,
-    Host
+    Host,
+    OnDestroy,
+    OnInit,
 } from '@angular/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { CommonModule } from '@angular/common';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { AutocompleteControlComponent } from '../concerns';
 import { IDGMatModule } from '../idg-mat.module';
@@ -21,13 +21,13 @@ import { IControlOptions } from '../models';
 const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => AutocompletesComponent),
-    multi: true
+    multi: true,
 };
 @Component({
     selector: 'idg-mat-autocompletes',
     template: `
-        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p autocomplete">
-            <mat-label>{{ hint }}</mat-label>
+        <mat-form-field [ngClass]="{ 'mat-form-field-invalid': formControl?.invalid }" class="w-100-p autocomplete">
+            <mat-label class="hint">{{ hint }}</mat-label>
             <mat-chip-list #chipList>
                 <mat-chip
                     *ngFor="let s of value"
@@ -73,13 +73,18 @@ const IDG_MAT_FORM_VALUE_ACCESSOR: any = {
             idg-mat-autocompletes {
                 width: 100%;
             }
+
             mat-form-field {
                 width: 100%;
             }
-        `
+
+            mat-label.hint {
+                padding-left: 4px;
+            }
+        `,
     ],
     providers: [IDG_MAT_FORM_VALUE_ACCESSOR],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class AutocompletesComponent extends AutocompleteControlComponent<string[]> implements OnInit, OnDestroy {
     constructor(
@@ -122,7 +127,7 @@ export class AutocompletesComponent extends AutocompleteControlComponent<string[
     }
 
     removeChip(c: string): void {
-        this.change((this.value = this.value.filter(s => s !== c)));
+        this.change((this.value = this.value.filter((s) => s !== c)));
     }
 
     onClear(): void {
@@ -134,6 +139,6 @@ export class AutocompletesComponent extends AutocompleteControlComponent<string[
 @NgModule({
     imports: [CommonModule, IDGMatModule],
     declarations: [AutocompletesComponent],
-    exports: [AutocompletesComponent]
+    exports: [AutocompletesComponent],
 })
 export class AutocompletesModule {}

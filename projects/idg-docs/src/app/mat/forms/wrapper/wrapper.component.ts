@@ -7,7 +7,7 @@ import { Validators } from '@angular/forms';
 @Component({
     selector: 'idg-docs-descriptive-form',
     templateUrl: './wrapper.component.html',
-    styleUrls: ['./wrapper.component.scss']
+    styleUrls: ['./wrapper.component.scss'],
 })
 export class WrapperComponent implements OnInit {
     constructor() {}
@@ -98,16 +98,17 @@ export class WrapperComponent implements OnInit {
     countries = [
         { text: 'México', value: 'MEX' },
         { text: 'USA', value: 'USA' },
-        { text: 'Cánada', value: 'CAN' }
+        { text: 'Cánada', value: 'CAN' },
     ];
     countries$ = new BehaviorSubject<IControlOptions[]>(this.countries);
 
     form = new IDGFormGroup({
         username: {
             placeholder: 'Type your username',
+            validators: [Validators.required],
             hint: 'Input component sample',
             elementType: 'input',
-            visible: true
+            visible: true,
         },
         email: {
             placeholder: 'Type your email address',
@@ -115,14 +116,14 @@ export class WrapperComponent implements OnInit {
             validators: [Validators.required],
             hint: 'Email component sample',
             elementType: 'email-input',
-            visible: true
+            visible: true,
         },
         website: {
             placeholder: 'Type your work or personal website',
             validators: [Validators.required],
             hint: 'Url component sample',
             elementType: 'url-input',
-            visible: true
+            visible: true,
         },
         gender: {
             placeholder: 'Select your gender',
@@ -132,8 +133,8 @@ export class WrapperComponent implements OnInit {
             visible: true,
             options: [
                 { text: 'Male', value: 1 },
-                { text: 'Female', value: 2 }
-            ]
+                { text: 'Female', value: 2 },
+            ],
         },
         country: {
             hint: 'Autocomplete component sample',
@@ -144,7 +145,7 @@ export class WrapperComponent implements OnInit {
             visible: true,
             asyncOptions: this.countries$.asObservable(),
             queryChange: (q: string) =>
-                this.countries$.next(this.countries.filter(c => c.text.toLowerCase().match(q.toLowerCase())))
+                this.countries$.next(this.countries.filter((c) => c.text.toLowerCase().match(q.toLowerCase()))),
         },
         countries: {
             hint: 'Autocompletes component sample',
@@ -157,28 +158,29 @@ export class WrapperComponent implements OnInit {
             value: [],
             asyncOptions: this.countries$.asObservable(),
             queryChange: (q: string) =>
-                this.countries$.next(this.countries.filter(c => c.text.toLowerCase().match(q.toLowerCase())))
+                this.countries$.next(this.countries.filter((c) => c.text.toLowerCase().match(q.toLowerCase()))),
         },
         about: {
             placeholder: 'Tell us about you',
             validators: [Validators.required],
             hint: 'Textarea component sample',
             elementType: 'textarea',
-            visible: true
+            visible: true,
         },
         birthday: {
             placeholder: 'Type your happy birthday',
             hint: 'Datepicker component sample',
+            validators: [Validators.required],
             elementType: 'date-input',
-            visible: true
+            visible: true,
         },
         files: {
             hint: 'File upload component sample',
             elementType: 'file-input',
             fileType: 'documents',
             filesCount: 2,
-            visible: true
-        }
+            visible: true,
+        },
     });
     hide = false;
 

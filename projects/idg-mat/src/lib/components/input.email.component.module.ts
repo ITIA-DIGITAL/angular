@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, Host, NgModule, Optional, SkipSelf } from '@angular/core';
+import { Component, Host, NgModule, Optional, SkipSelf, forwardRef } from '@angular/core';
 import { AbstractControl, ControlContainer, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
 import { AbstractControlComponent } from '../concerns';
@@ -20,29 +20,33 @@ const IDG_MAT_NG_VALIDATORS = {
 @Component({
     selector: 'idg-mat-input-email',
     template: `
-        <mat-form-field appearance="outline" floatLabel="always">
-            <mat-label>{{ hint }}</mat-label>
+        <mat-form-field [ngClass]="{ 'mat-form-field-invalid': formControl?.invalid }">
+            <mat-label class="hint">{{ hint }}</mat-label>
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <mat-icon matPrefix>alternate_email</mat-icon>
 
-                <div fxFlex fxLayout="column">
-                    <input
-                        matInput
-                        autocomplete="off"
-                        (input)="change($event.target['value'])"
-                        [placeholder]="placeholder"
-                        [disabled]="disabled"
-                        [value]="value"
-                    />
-                    <ng-content select="mat-hint"></ng-content>
-                    <ng-content select="mat-error"></ng-content>
-                    <mat-error *ngIf="formControl?.errors?.match">Invalid</mat-error>
-                </div>
+                <input
+                    matInput
+                    autocomplete="off"
+                    (input)="change($event.target['value'])"
+                    [placeholder]="placeholder"
+                    [disabled]="disabled"
+                    [value]="value"
+                />
 
                 <ng-content select="[matSuffix]"></ng-content>
                 <ng-content select="button"></ng-content>
                 <ng-content select="a"></ng-content>
             </div>
+
+            <ng-content select="mat-hint"></ng-content>
+            <ng-content select="mat-error"></ng-content>
+            <ng-container *ngIf="formControl?.invalid">
+                <mat-error *ngIf="formControl?.errors?.required; else defaultError">Requerido</mat-error>
+                <ng-template #defaultError>
+                    <mat-error>Email inválido</mat-error>
+                </ng-template>
+            </ng-container>
         </mat-form-field>
     `,
     styles: [
@@ -53,6 +57,10 @@ const IDG_MAT_NG_VALIDATORS = {
 
             mat-form-field {
                 width: 100%;
+            }
+
+            mat-label.hint {
+                padding-left: 4px;
             }
         `,
     ],
@@ -69,7 +77,9 @@ export class InputEmailComponent extends AbstractControlComponent<string> implem
     }
 
     validate(c: AbstractControl) {
-        if (!c.value) return null;
+        if (!c.value) {
+            return null;
+        }
 
         return regex.test(c.value)
             ? null

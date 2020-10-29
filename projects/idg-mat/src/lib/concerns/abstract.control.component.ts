@@ -31,37 +31,35 @@ export abstract class AbstractControlComponent<T>
     disabled: boolean;
 
     ngOnInit(): void {
-        if (!this.config) {
-            if (!!this.formControl) {
-                this.config = this.formControl.config;
-            } else if (this.controlContainer) {
+        // R e a c t i v e   f o r m
+        if (!!this.controlContainer) {
+            if (!this.formControl) {
                 if (this.formControlName) {
-                    const c: any = this.controlContainer.control.get(this.formControlName);
-
-                    if (!c) {
-                        throw new Error(`IDG: ${this.formControlName} not found in form`);
-                    }
-
-                    if (!(c instanceof IDGFormControl)) {
-                        throw new Error('IDG: FormControl is not IDGFormControl');
-                    }
-
-                    this.formControl = c as IDGFormControl;
-                    this.config = this.formControl.config;
+                    this.formControl = this.controlContainer.control.get(this.formControlName) as IDGFormControl;
                 } else {
                     throw new Error('IDG: Missing [FormControlName] directive from host element of the component');
                 }
-            } else {
-                throw new Error(
-                    `IDG: No config (IControlConfig) provided, check ${
-                        this.formControlName || this.name
-                    } control is inside a [formGroup] container,  [formControl] or [config] param is provided`
-                );
+            }
+
+            if (!this.formControl) {
+                throw new Error(`IDG: ${this.formControlName} not found in form`);
+            }
+
+            if (!(this.formControl instanceof IDGFormControl)) {
+                throw new Error('IDG: FormControl is not IDGFormControl');
+            }
+
+            if (!this.config) {
+                this.config = this.formControl.config;
             }
         }
 
         if (!this.config) {
-            throw new Error('IDG: No config (IControlConfig) provided');
+            throw new Error(
+                `IDG: No config (IControlConfig) provided, check ${
+                    this.formControlName || this.name
+                } control is inside a [formGroup] container, [formControl] or [config] param is provided`
+            );
         }
 
         if (!this.name) {

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+
 import { ConnectService } from '../../connect.service';
 import { AbstractTableComponent, CredentialQuery, Credential } from 'idg-connect';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'idg-docs-table-component',
     templateUrl: './table.component.html',
-    styleUrls: ['./table.component.scss']
+    styleUrls: ['./table.component.scss'],
 })
-export class TableComponent extends AbstractTableComponent<Credential, CredentialQuery> implements OnInit {
+export class TableComponent extends AbstractTableComponent<Credential, CredentialQuery> {
     displayedColumns = ['code', 'title'];
 
     html = `
