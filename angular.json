@@ -10,7 +10,7 @@
             "prefix": "idg-connect",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "projects/idg-connect/tsconfig.lib.json",
                         "project": "projects/idg-connect/ng-package.json"
@@ -48,7 +48,7 @@
             "prefix": "idg-mat",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "projects/idg-mat/tsconfig.lib.json",
                         "project": "projects/idg-mat/ng-package.json"
@@ -114,7 +114,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
