@@ -2,6 +2,14 @@
 
 Material control library for Angular reactive forms
 
+## Npm registri
+```
+vi ~~/npmrc
+==>
+registry=https://npm.pkg.github.com/ITIA-DIGITAL
+//npm.pkg.github.com/:_authToken=TOKEN 
+```
+
 ## Publish
 
 ```console
